@@ -1,0 +1,21 @@
+{% extends "Base.html" %}
+
+
+
+{% block content %}
+<div class="weather-input">
+    <form action="" method="post">
+        {% csrf_token %}
+        <input name="city" value="{{city}}">
+        <button type="submit">Load</button>
+    </form>
+</div>
+
+<div>
+    <h1>
+        {{realtime_weather.temp}}
+    </h1>
+    <img src="{{realtime_weather.condition_img}}" alt="">
+    <p>{{realtime_weather.condition_text}}</p>
+</div>
+{% endblock %}
