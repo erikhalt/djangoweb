@@ -5,7 +5,11 @@ body {
 .body {
     position: absolute;
     width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
     height: -webkit-fill-available;
+    height: 100%;
+    height: fill-available;
     display: flex;
 }
 
