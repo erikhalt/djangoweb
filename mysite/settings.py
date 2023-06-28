@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+import mimetypes
+
+
+
+mimetypes.add_type("text/css", ".css", True)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +32,7 @@ SECRET_KEY = 'django-insecure-beqri^20a2e!#zzc$*r*au-k-!$=k+14!v^z1r#t2px43^hjbe
 DEBUG = (os.getenv('DEBUG', 'True') == 'True')
 
 
-allowed_host = os.environ['ALLOWED_HOST']
+allowed_host = os.getenv('ALLOWED_HOST','*')
 ALLOWED_HOSTS = [allowed_host]
 
 
@@ -51,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'mysite.urls'
