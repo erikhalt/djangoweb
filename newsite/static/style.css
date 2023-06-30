@@ -17,14 +17,14 @@ body {
     position: relative;
     height: 100%;
     width: 20%;
-    background-color: #4F6D7A;
+    background-color: #124559;
 }
 
 .content {
     position: relative;
     width: 80%;
     height: 100%;
-    background: linear-gradient(90deg, #333333, 5%, #C0D6DF);
+    background: linear-gradient(90deg, #333333, 5%, #AEC3B0);
 }
 
 .navbarbutton {
@@ -35,6 +35,8 @@ body {
     border-radius: 50px;
     left: 15%;
     right: 15%;
+    background-color: #598392;
+    color: #01161E;
 }
 
 #tag {
@@ -44,5 +46,61 @@ body {
     width: 70%;
     left: 15%;
     right: 15%;
+    text-align: center;
+}
+
+.homescreen {
+    position: relative;
+    width: 50%;
+    height: 50%;
+    background-color: #124559;
+    top: 15%;
+    bottom: 25%;
+    left: 25%;
+    right: 25%;
+    box-shadow: 0 0 40px #01161E;
+    border-radius: 50px;
+}
+
+.homescreen h1 {
+    position: relative;
+    font: italic bold 15px monospace;
+    top: 5%;
+    width: 70%;
+    font-size: 300%;
+    left: 15%;
+    right: 15%;
+    text-align: center;
+}
+
+.homescreen p {
+    position: relative;
+    height: 50%;
+    top: 15%;
+    bottom: 15%;
+    width: 50%;
+    left: 25%;
+    right: 25%;
+    text-align: center;
+}
+
+.links {
+    position: relative;
+    width: 50%;
+    height: 25%;
+    left: 25%;
+    right: 25%;
+    align-items: center;
+}
+
+.homescreen a {
+    position: relative;
+    top: 15%;
+    bottom: 15%;
+    left: 25%;
+    right: 25%;
+    width: 50%;
+    margin-top: 5%;
+    font-size: 100%;
     text-align: center;
 }
