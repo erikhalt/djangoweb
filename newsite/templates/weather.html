@@ -3,19 +3,30 @@
 
 
 {% block content %}
-<div class="weather-input">
-    <form action="" method="post">
-        {% csrf_token %}
-        <input name="city" value="{{city}}">
-        <button type="submit">Load</button>
-    </form>
-</div>
-
-<div>
+<div class="weather-output">
     <h1>
         {{realtime_weather.temp}}
     </h1>
     <img src="{{realtime_weather.condition_img}}" alt="">
     <p>{{realtime_weather.condition_text}}</p>
 </div>
+
+
+{% for forecast in forecastlist%}
+<h1>{{forecast.avg_temp}}</h1>
+{%endfor%}
+
+
+<div class="weather-input">
+    <form action="" method="post">
+        {% csrf_token %}
+        <input name="city" value="{{city}}">
+        <div>
+            3<input type="range" name="days" id="days" min="3" max="10" value="{{inputdays}}">10
+            <h1>{{inputdays}}</h1>
+        </div>
+        <button type="submit">Load</button>
+    </form>
+</div>
+
 {% endblock %}
