@@ -16,28 +16,40 @@ body {
 .side-navbar {
     position: relative;
     height: 100%;
-    width: 20%;
-    background-color: #124559;
+    width: 15%;
+    background-color: white;
+    border: 1px solid black;
 }
 
 .content {
     position: relative;
     width: 80%;
     height: 100%;
-    background: linear-gradient(90deg, #333333, 5%, #AEC3B0);
+    background-color: white;
 }
 
 .navbarbutton {
     position: relative;
     margin-top: 20%;
+    display: block;
     width: 70%;
     height: 5%;
-    border-radius: 50px;
     left: 15%;
     right: 15%;
-    background-color: #598392;
-    color: #01161E;
+    border: 1px solid black;
+    text-align: center;
+    padding-top: 10px;
+    color: #0ff;
+    border-radius: 4px;
 }
+
+.navbarbutton:hover {
+    color: black;
+    background-color: #0ff;
+    box-shadow: 0px 0px 10px 10px #0ff;
+}
+
+
 
 #tag {
     position: absolute;
@@ -103,4 +115,120 @@ body {
     margin-top: 5%;
     font-size: 100%;
     text-align: center;
+}
+
+.weather-output {
+    position: relative;
+    width: 70%;
+    height: 70%;
+    background-color: #124559;
+    top: 5%;
+    bottom: 15%;
+    left: 15%;
+    right: 15%;
+    box-shadow: 0 0 40px #01161E;
+    border-radius: 50px;
+}
+
+.weather-output h1 {
+    position: relative;
+    font: italic bold 15px monospace;
+    top: 5%;
+    width: 70%;
+    font-size: 150%;
+    left: 15%;
+    right: 15%;
+    text-align: center;
+}
+
+.today {
+    position: absolute;
+    width: 30%;
+    height: 45%;
+    left: 35%;
+    right: 35%;
+    top: 5%;
+    box-shadow: 0 0 40px #01161E;
+    border-radius: 50px;
+    background-color: #EFF6E0;
+    margin-bottom: 5%;
+}
+
+.today img {
+    position: absolute;
+    width: 15%;
+    left: 42.5%;
+    right: 42.5%;
+}
+
+.today p {
+    position: absolute;
+    width: 60%;
+    height: 30%;
+    left: 20%;
+    right: 15%;
+    font-size: 90%;
+    bottom: 20%;
+    top: 50%;
+    text-align: center;
+    font: italic bold 15px monospace;
+}
+
+.forecast-weather-container {
+    position: absolute;
+    box-shadow: 0 0 40px #01161E;
+    border-radius: 50px;
+    background-color: #EFF6E0;
+    opacity: 60%;
+    width: 60%;
+    height: 30%;
+    bottom: 5%;
+    top: 52%;
+    left: 10%;
+    right: 10%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: row;
+}
+
+.forecast-weather-divs {
+    width: 40%;
+    height: 80%;
+    background-color: #EFF6E0;
+    margin-left: 5%;
+    box-shadow: 0 0 20px #01161E;
+    border-radius: 50px;
+    text-align: center;
+    font: italic bold 15px monospace;
+}
+
+.forecast-weather-divs img {
+    width: 50%;
+}
+
+
+
+
+a:link {
+    text-decoration: none;
+}
+
+
+a:visited {
+    text-decoration: none;
+}
+
+
+a:hover {
+    text-decoration: none;
+}
+
+
+a:active {
+    text-decoration: none;
 }

@@ -4,17 +4,33 @@
 
 {% block content %}
 <div class="weather-output">
-    <h1>
-        {{realtime_weather.temp}}
-    </h1>
-    <img src="{{realtime_weather.condition_img}}" alt="">
-    <p>{{realtime_weather.condition_text}}</p>
+    <div class="today">
+        <h1>Today</h1>
+        <h1>
+            {{realtime_weather.temp}}°C
+        </h1>
+        <img src="{{realtime_weather.condition_img}}" alt="">
+        <p>{{realtime_weather.condition_text}}</p>
+    </div>
+
+    <div class="forecast-weather-container">
+        {% for forecast in forecastlist%}
+
+        <div class="forecast-weather-divs">
+            <h1>{{forecast.avg_temp}}°C {{forecast.weekday_name}}</h1>
+            <img src="{{forecast.condition_icon}}" alt="">
+            <p>min:{{forecast.min_temp}}°C
+                max:{{forecast.max_temp}}°C
+            </p>
+        </div>
+
+
+        {%endfor%}
+    </div>
 </div>
 
 
-{% for forecast in forecastlist%}
-<h1>{{forecast.avg_temp}}</h1>
-{%endfor%}
+
 
 
 <div class="weather-input">
