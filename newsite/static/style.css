@@ -1,5 +1,11 @@
 body {
     margin: 0px;
+    font-family: monospace;
+    font: lucida;
+}
+
+text {
+    font: papyrus;
 }
 
 .body {
@@ -67,40 +73,7 @@ body {
     text-align: center;
 }
 
-.homescreen {
-    position: relative;
-    width: 50%;
-    height: 50%;
-    background-color: #124559;
-    top: 15%;
-    bottom: 25%;
-    left: 25%;
-    right: 25%;
-    box-shadow: 0 0 40px #01161E;
-    border-radius: 50px;
-}
 
-.homescreen h1 {
-    position: relative;
-    font: italic bold 15px monospace;
-    top: 5%;
-    width: 70%;
-    font-size: 300%;
-    left: 15%;
-    right: 15%;
-    text-align: center;
-}
-
-.homescreen p {
-    position: relative;
-    height: 50%;
-    top: 15%;
-    bottom: 15%;
-    width: 50%;
-    left: 25%;
-    right: 25%;
-    text-align: center;
-}
 
 .links {
     position: absolute;
@@ -118,17 +91,6 @@ body {
 }
 
 
-.homescreen a {
-    position: relative;
-    top: 15%;
-    bottom: 15%;
-    left: 25%;
-    right: 25%;
-    width: 50%;
-    margin-top: 5%;
-    font-size: 100%;
-    text-align: center;
-}
 
 .weather-output {
     position: relative;
@@ -244,4 +206,46 @@ a:hover {
 
 a:active {
     text-decoration: none;
+}
+
+
+
+.home-info {
+    position: absolute;
+    width: 10%;
+    left: 45%;
+    right: 45%;
+    height: 5%;
+    top: 85%;
+    bottom: 5%;
+    font-size: 150%;
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+    border-radius: 10px;
+    border: 1px solid white;
+}
+
+.home-info:hover+#infotext {
+    display: block;
+}
+
+.home-info:hover {
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+}
+
+#infotext {
+    position: absolute;
+    border: 1px solid black;
+    width: 30%;
+    left: 35%;
+    right: 35%;
+    height: 20%;
+    text-align: center;
+    bottom: 35%;
+    top: 45%;
+    background-color: rgba(255, 255, 255, 0.466);
+    border-radius: 5px;
+    display: none;
 }
