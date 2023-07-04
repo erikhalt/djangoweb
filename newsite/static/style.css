@@ -23,7 +23,7 @@ text {
     position: relative;
     height: -webkit-fill-available;
     width: 15%;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.534);
     border: 1px solid black;
 }
 
@@ -31,10 +31,10 @@ text {
     position: relative;
     width: -webkit-fill-available;
     height: -webkit-fill-available;
-    background-color: white;
+
 }
 
-.content img {
+.body img {
     position: absolute;
     width: -webkit-fill-available;
     height: -webkit-fill-available;
@@ -51,14 +51,14 @@ text {
     border: 1px solid black;
     text-align: center;
     padding-top: 10px;
-    color: #0ff;
+    color: black;
     border-radius: 4px;
+    font-size: 120%;
 }
 
 .navbarbutton:hover {
-    color: black;
-    background-color: #0ff;
-    box-shadow: 0px 0px 10px 10px #0ff;
+    color: white;
+    background-color: black;
 }
 
 
