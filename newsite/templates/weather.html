@@ -28,22 +28,22 @@
 
         {%endfor%}
     </div>
+    <div class="weather-input">
+        <form action="" method="post">
+            {% csrf_token %}
+            <input name="city" value="{{city}}">
+            <div>
+                3<input type="range" name="days" id="days" min="3" max="10" value="{{inputdays}}">10
+                <h1>{{inputdays}}</h1>
+            </div>
+            <button type="submit">Load</button>
+        </form>
+    </div>
 </div>
 
 
 
 
 
-<div class="weather-input">
-    <form action="" method="post">
-        {% csrf_token %}
-        <input name="city" value="{{city}}">
-        <div>
-            3<input type="range" name="days" id="days" min="3" max="10" value="{{inputdays}}">10
-            <h1>{{inputdays}}</h1>
-        </div>
-        <button type="submit">Load</button>
-    </form>
-</div>
 
 {% endblock %}
