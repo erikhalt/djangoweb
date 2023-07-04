@@ -104,8 +104,8 @@ class weather_realtime_handler():
 class weahter_forecast_handler():
     def __init__(self,apireturn,name):
         self.weekday_name = name
-        self.min_temp = apireturn['maxtemp_c']
-        self.max_temp = apireturn['mintemp_c']
+        self.min_temp = apireturn['mintemp_c']
+        self.max_temp = apireturn['maxtemp_c']
         self.avg_temp = apireturn['avgtemp_c']
         
         self.chance_of_rain = apireturn['daily_chance_of_rain']
