@@ -34,7 +34,7 @@ text {
 
 }
 
-.body img {
+#bg {
     position: absolute;
     width: -webkit-fill-available;
     height: -webkit-fill-available;
@@ -96,13 +96,12 @@ text {
     position: relative;
     width: 70%;
     height: 70%;
-    background-color: #124559;
+    background-color: rgba(255, 255, 255, 0.534);
     top: 5%;
     bottom: 15%;
     left: 15%;
     right: 15%;
-    box-shadow: 0 0 40px #01161E;
-    border-radius: 50px;
+    border-radius: 10px;
 }
 
 .weather-output h1 {
@@ -120,18 +119,14 @@ text {
     position: absolute;
     width: 30%;
     height: 45%;
-    left: 35%;
-    right: 35%;
+    left: 5%;
+    right: 65%;
     top: 5%;
-    box-shadow: 0 0 40px #01161E;
-    border-radius: 50px;
-    background-color: #EFF6E0;
     margin-bottom: 5%;
 }
 
 .today img {
     position: absolute;
-    width: 15%;
     left: 42.5%;
     right: 42.5%;
 }
@@ -151,39 +146,60 @@ text {
 
 .forecast-weather-container {
     position: absolute;
-    box-shadow: 0 0 40px #01161E;
-    border-radius: 50px;
-    background-color: #EFF6E0;
+    background-color: rgba(255, 255, 255, 0);
     opacity: 60%;
     width: 60%;
-    height: 30%;
+    height: 90%;
     bottom: 5%;
-    top: 52%;
-    left: 10%;
-    right: 10%;
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    overflow-x: scroll;
-    overflow-y: hidden;
+    top: 5%;
+    left: 35%;
+    right: 5%;
+    overflow-y: scroll;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .forecast-weather-divs {
-    width: 40%;
-    height: 80%;
+    position: relative;
+    width: 55%;
+    height: 22%;
     background-color: #EFF6E0;
-    margin-left: 5%;
-    box-shadow: 0 0 20px #01161E;
-    border-radius: 50px;
-    text-align: center;
+    margin-top: 1%;
+    border-radius: 10px;
     font: italic bold 15px monospace;
+    right: 5%;
+    left: 30%;
+    display: flex;
 }
 
+.img-forecast {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    right: -35%;
+}
+
+.forecast-weather-divs h1 {
+    position: relative;
+    top: 2%;
+    left: 2%;
+}
+
+.forecast-weather-divs h2 {
+    position: relative;
+    left: -25%;
+    top: 36%;
+}
+
+.forecast-weather-divs h3 {
+    position: relative;
+    right: 10%;
+    top: 5%;
+}
+
+
 .forecast-weather-divs img {
-    width: 50%;
+    right: 2%;
 }
 
 
@@ -248,4 +264,10 @@ a:active {
     background-color: rgba(255, 255, 255, 0.466);
     border-radius: 5px;
     display: none;
+}
+
+.weather-input {
+    position: absolute;
+    bottom: 2%;
+    left: 2%;
 }

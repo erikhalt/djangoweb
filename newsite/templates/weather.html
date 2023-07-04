@@ -17,15 +17,27 @@
         {% for forecast in forecastlist%}
 
         <div class="forecast-weather-divs">
-            <h1>{{forecast.avg_temp}}°C {{forecast.weekday_name}}</h1>
-            <img src="{{forecast.condition_icon}}" alt="">
-            <p>min:{{forecast.min_temp}}°C
+            <h1 class="forecast-content-h1">{{forecast.weekday_name}}</h1>
+            <h2 class="forecast-content-h2">{{forecast.avg_temp}}°C</h2>
+            <h3 class="forecast-content-h3">min:{{forecast.min_temp}}°C
                 max:{{forecast.max_temp}}°C
-            </p>
+            </h3>
+            <img class="img-forecast" src="{{forecast.condition_icon}}" alt="">
         </div>
 
 
         {%endfor%}
+    </div>
+    <div class="weather-input">
+        <form action="" method="post">
+            {% csrf_token %}
+            <input name="city" value="{{city}}">
+            <div>
+                3<input type="range" name="days" id="days" min="3" max="10" value="{{inputdays}}">10
+                <h1>{{inputdays}}</h1>
+            </div>
+            <button type="submit">Load</button>
+        </form>
     </div>
 </div>
 
@@ -33,16 +45,5 @@
 
 
 
-<div class="weather-input">
-    <form action="" method="post">
-        {% csrf_token %}
-        <input name="city" value="{{city}}">
-        <div>
-            3<input type="range" name="days" id="days" min="3" max="10" value="{{inputdays}}">10
-            <h1>{{inputdays}}</h1>
-        </div>
-        <button type="submit">Load</button>
-    </form>
-</div>
 
 {% endblock %}
