@@ -54,7 +54,7 @@ body {
 #tag {
     position: absolute;
     font: italic bold 15px monospace;
-    bottom: 2%;
+    bottom: 10%;
     width: 70%;
     left: 15%;
     right: 15%;
@@ -97,13 +97,20 @@ body {
 }
 
 .links {
-    position: relative;
+    position: absolute;
     width: 50%;
-    height: 25%;
+    height: 5%;
     left: 25%;
     right: 25%;
+    bottom: 5%;
     align-items: center;
 }
+
+.links a {
+    font-size: 75%;
+    color: black;
+}
+
 
 .homescreen a {
     position: relative;
