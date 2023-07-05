@@ -39,7 +39,8 @@ ALLOWED_HOSTS = [allowed_host]
 # Application definition
 
 INSTALLED_APPS = [
-    'newsite.apps.NewsiteConfig',
+    'homepage.apps.HomepageConfig',
+    'weatherapi.apps.WeatherapiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -64,7 +65,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [(os.path.join(BASE_DIR, 'templates')),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

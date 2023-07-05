@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class NewsiteConfig(AppConfig):
+class HomepageConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'newsite'
+    name = 'homepage'
