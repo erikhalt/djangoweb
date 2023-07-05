@@ -33,7 +33,14 @@ DEBUG = (os.getenv('DEBUG', 'True') == 'True')
 
 
 allowed_host = os.getenv('ALLOWED_HOST','*')
-ALLOWED_HOSTS = [allowed_host]
+
+if allowed_host != '*':
+    allowed_host = allowed_host.split(',')
+else:
+    allowed_host = ['*']
+    
+ALLOWED_HOSTS = allowed_host
+
 
 
 # Application definition
