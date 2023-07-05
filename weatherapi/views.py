@@ -5,9 +5,6 @@ from django.views.decorators.csrf import csrf_exempt
 import requests
 import datetime
 
-def sayhello(request):
-    
-    return render(request,"home.html")
 
 city = 'Vasteras'
 days = 3
