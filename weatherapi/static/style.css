@@ -4,6 +4,11 @@ body {
     font: lucida;
 }
 
+body,
+html {
+    height: 100%;
+}
+
 text {
     font: papyrus;
 }
@@ -16,12 +21,15 @@ text {
     height: -webkit-fill-available;
     height: 100%;
     height: fill-available;
+    min-height: -moz-available;
     display: flex;
 }
 
 .side-navbar {
     position: relative;
     height: -webkit-fill-available;
+    min-height: -moz-available;
+    height: fill-available;
     width: 15%;
     background-color: rgba(255, 255, 255, 0.534);
     border: 1px solid black;
@@ -30,14 +38,22 @@ text {
 .content {
     position: relative;
     width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
     height: -webkit-fill-available;
+    min-height: -moz-available;
+    height: fill-available;
 
 }
 
 #bg {
     position: absolute;
     width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
     height: -webkit-fill-available;
+    min-height: -moz-available;
+    height: fill-available;
 }
 
 .navbarbutton {
