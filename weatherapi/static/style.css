@@ -42,15 +42,16 @@ text {
 
 .navbarbutton {
     position: relative;
-    margin-top: 20%;
+    margin-top: 10%;
     display: block;
-    width: 70%;
-    height: 5%;
+    width: 50%;
+    height: 2%;
     left: 15%;
     right: 15%;
     border: 1px solid black;
     text-align: center;
-    padding-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     color: black;
     border-radius: 4px;
     font-size: 120%;
@@ -270,4 +271,11 @@ a:active {
     position: absolute;
     bottom: 2%;
     left: 2%;
+}
+
+.navbar-menus {
+    border-bottom: 1px solid black;
+    position: relative;
+    width: 80%;
+    margin-top: 30%;
 }
