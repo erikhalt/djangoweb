@@ -1,0 +1,16 @@
+{% extends "Base.html" %}
+
+
+{% block content %}
+<div class="sorting-wrapper">
+    <div class="staple-wrapper">
+        {% for i in data %}
+        <div id='staple-{{i}}' class='staples'>
+        </div>
+        {% endfor%}
+    </div>
+
+    <button class="navbarbutton" id="sortingbutton" onclick="bubblesort({{ lengthofdata }})">BubbleSort</button>
+    <button class="navbarbutton" id="generate" onclick="generate({{ lengthofdata }})">GenerateNumbers</button>
+</div>
+{% endblock %}
