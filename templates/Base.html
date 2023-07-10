@@ -19,8 +19,7 @@
     </title>
 
     <link rel="shortcut icon" href="#">
-
-
+    <link rel="stylesheet" type="text/css" href="{% static 'sorting.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 
 </head>
@@ -38,6 +37,9 @@
             <h1 class="navbar-menus">projects</h1>
             <a href="{% url 'weatherapi' %}" class="navbarbutton">
                 WEATHER
+            </a>
+            <a href="{% url 'sortingalgo' %}" class="navbarbutton">
+                SORTING
             </a>
 
 

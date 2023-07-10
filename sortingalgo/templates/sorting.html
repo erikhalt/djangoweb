@@ -1,0 +1,14 @@
+{% extends "Base.html" %}
+
+
+{% block content %}
+<div class="sorting-wrapper">
+    <div class="staple-wrapper">
+        {% for i in data %}
+        <div style="
+    height: {{i}}% ;" id="staple-{{i}}" class="staples">
+        </div>
+        {% endfor%}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+.sorting-wrapper {
+    width: 70%;
+    height: 70%;
+    top: 15%;
+    bottom: 15%;
+    left: 15%;
+    right: 15%;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.534);
+    border-radius: 5px;
+
+}
+
+.staples {
+    position: relative;
+    width: 2%;
+    background-color: black;
+    margin-left: 1%;
+    bottom: 0px;
+}
+
+.staple-wrapper {
+    position: relative;
+    width: 60%;
+    height: 60%;
+    left: 20%;
+    top: 20%;
+    display: flex;
+    background-color: white;
+}
