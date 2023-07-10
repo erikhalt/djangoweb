@@ -5,7 +5,7 @@ import random
 def sorting(request):
     list = []
     for i in range(40):
-        list.append(random.randint(10,80))
+        list.append(0)
+    length = len(list)
 
-
-    return render(request,"sorting.html",{'data':list})
+    return render(request,"sorting.html",{'data':list,'lengthofdata':length})
