@@ -70,8 +70,8 @@ jobs:
         run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 clustermedrasmus
 
       - name: Update deployment
-        run: kubectl set image deployment/${{ env.DEPLOYMENT_NAME }} djangoproject=registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:${{ env.TAG }} --namespace=${{ env.NAMESPACE }}
+        run: kubectl set image deployment/${{ env.DEPLOYMENT_NAME }} djangoproject-prod=registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:${{ env.TAG }} -n ${{ env.NAMESPACE }}
         
       - name: Verify deployment
-        run: kubectl rollout status deployment/${{ env.DEPLOYMENT_NAME }} --namespace=${{ env.NAMESPACE }}
+        run: kubectl rollout status deployment/${{ env.DEPLOYMENT_NAME }} -n ${{ env.NAMESPACE }}
       
