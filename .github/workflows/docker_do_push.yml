@@ -52,6 +52,15 @@ jobs:
         run: doctl registry login --expiry-seconds 600
       - name: Tag image 
         run:
-          docker tag python-docker registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:latest
+          docker tag python-docker registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:$(git rev-parse --short "$GITHUB_SHA")
+      
       - name: Push image to DO Container Registry 
-        run: docker push registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:latest
+        run: docker push registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:$(git rev-parse --short "$GITHUB_SHA")
+      
+      - name: Save DigitalOcean kubeconfig with short-lived credentials
+        run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 clustermedrasmus
+
+      - name: Update deployment
+        run: kubectl set image deployment/djangoproject-deployment djangoproject=registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:$(git rev-parse --short "$GITHUB_SHA")
+      - name: Verify deployment
+        run: kubectl rollout status deployment/djangoproject-deployment
