@@ -62,5 +62,6 @@ jobs:
 
       - name: Update deployment
         run: kubectl set image deployment/djangoproject-deployment djangoproject=registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:$(git rev-parse --short "$GITHUB_SHA")
+        
       - name: Verify deployment
         run: kubectl rollout status deployment/djangoproject-deployment
