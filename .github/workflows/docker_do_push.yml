@@ -56,8 +56,8 @@ jobs:
       - name: Push image to DO Container Registry 
         run: docker push registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:latest
 
-      - name: Deploy to DigitalOcean Kubernetes
-        run: kubectl apply -f yaml/deployment.yml -n default
+      - name: Update deployment
+        run: kubectl set image deployment/djangoproject djangoproject=djangoproject:latest
 
       - name: Verify deployment
         run: kubectl rollout status deployment/django-deployment
