@@ -61,7 +61,7 @@ jobs:
         run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 clustermedrasmus
 
       - name: Update deployment
-        run: kubectl set image deployment/djangoproject djangoproject=djangoproject:latest
+        run: kubectl set image deployment/djangoproject-deployment djangoproject=djangoproject:latest
 
       - name: Verify deployment
-        run: kubectl rollout status deployment/django-deployment
+        run: kubectl rollout status deployment/djangoproject-deployment
