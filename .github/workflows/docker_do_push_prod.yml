@@ -7,7 +7,8 @@ on:
     types: [published]
 
 env:
-  PROJECT_NAME: djangoproject-prod
+  PROJECT_NAME: djangoproject
+  TAG: $(git rev-parse --short "$GITHUB_SHA")-prod
 jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
@@ -44,7 +45,7 @@ jobs:
     steps:
       - name: Checkout the repo 
         uses: actions/checkout@v2
-        
+
       - name: Build image 
         run: docker build -t python-docker .
 
@@ -58,15 +59,15 @@ jobs:
 
       - name: Tag image 
         run:
-          docker tag python-docker registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:$(git rev-parse --short "$GITHUB_SHA")
+          docker tag python-docker registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:${{ env.TAG }}
       
       - name: Push image to DO Container Registry 
-        run: docker push registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:$(git rev-parse --short "$GITHUB_SHA")
+        run: docker push registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:${{ env.TAG }}
       
       - name: Save DigitalOcean kubeconfig with short-lived credentials
         run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 clustermedrasmus
 
       - name: Update deployment
-        run: kubectl set image deployment/djangoproject-deployment djangoproject=registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:$(git rev-parse --short "$GITHUB_SHA")
+        run: kubectl set image deployment/djangoproject-deployment djangoproject=registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:${{ env.TAG }}
       - name: Verify deployment
         run: kubectl rollout status deployment/djangoproject-deployment
