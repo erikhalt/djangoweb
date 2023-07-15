@@ -16,6 +16,7 @@ docker run -p 8000:5000 -e DEBUG=True djangoproject
 
 
 docker run -p 8000:5000 djangoproject
+
 ´´´
 
 
