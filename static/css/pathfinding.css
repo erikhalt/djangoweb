@@ -19,4 +19,11 @@
     background-color: black;
     bottom: 10%;
     top: 0%;
+    overflow: hidden;
+}
+
+.point-array {
+    background-color: red;
+    position: relative;
+    border: 1px solid black;
 }
