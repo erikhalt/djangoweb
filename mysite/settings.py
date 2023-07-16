@@ -140,8 +140,11 @@ import os
 
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]  
-STATIC_ROOT = BASE_DIR / 'static'                     #commented because doesant work with python manage.py runserver but it works with docker and live on cluster
+STATICFILES_DIRS = [BASE_DIR / "static"]
+if (os.getenv('STATIC_ROOT_ENV', 'False') == 'True'):
+    STATIC_ROOT = BASE_DIR / 'static'
+else:
+    pass
 
 
 # Default primary key field type
