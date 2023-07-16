@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 def pathfinding(request):
     number_of_points = []
-    for i in range(10000):
+    for i in range(2500):
         number_of_points.append(i)
 
   
