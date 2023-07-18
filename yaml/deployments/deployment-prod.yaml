@@ -24,3 +24,5 @@ spec:
               value: 'False'
             - name: ALLOWED_HOST
               value: 'haltlair.se'
+            - name: STATIC_ROOT
+              value: 'True'

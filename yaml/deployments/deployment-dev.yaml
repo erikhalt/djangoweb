@@ -19,3 +19,10 @@ spec:
         image: registry.digitalocean.com/erikregistry/djangoproject:latest
         ports:
         - containerPort: 5000
+        env:
+            - name: DEBUG
+              value: 'True'
+            - name: ALLOWED_HOST
+              value: 'haltlair.se'
+            - name: STATIC_ROOT
+              value: 'True'

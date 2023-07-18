@@ -1,0 +1,46 @@
+name: Deploy Helmchart
+
+on:
+  workflow_dispatch:
+    inputs:
+      namespaces:
+        description: 'Namespace to deploy to'
+        required: true
+        default: 'default'
+        type: choice
+        options:
+        - dev
+        - prod 
+
+jobs:
+  deploy_the_thing:
+    runs-on: ubuntu-latest
+    steps:      
+      - name: Checkout the repo 
+        uses: actions/checkout@v2
+
+      - name: Install doctl 
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_API_KEY }}
+
+      - name: Save DigitalOcean kubeconfig with short-lived credentials
+        run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 clustermedrasmus
+
+      - name: Install Helmchart
+        uses: azure/setup-helm@v3
+         
+      - name: Generate Kubernetes manifest from Helmchart
+        run: helm template helm -f helm/values.$NAMESPACE.yaml > out.yaml
+        env:
+          NAMESPACE: ${{ inputs.namespaces }}
+
+      - name: Deploy to DigitalOcean Kubernetes
+        run: kubectl apply -f out.yaml -n $NAMESPACE
+        env:
+          NAMESPACE: ${{ inputs.namespaces }}
+
+      - name: Verify deployment
+        run: kubectl rollout status deployment/my-deployment -n $NAMESPACE
+        env:
+          NAMESPACE: ${{ inputs.namespaces }}
