@@ -1,6 +1,6 @@
 enviroment: prod
-appname: djangoproject-prod
-deploymentname: djangoproject-prod-deployment
+appname: djangoproject
+deploymentname: djangoproject-deployment
 image: registry.digitalocean.com/erikregistry/djangoproject:latest
 imagePort: 5000
 
