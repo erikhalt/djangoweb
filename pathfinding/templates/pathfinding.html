@@ -1,0 +1,27 @@
+{% extends "Base.html" %}
+
+
+{% block content %}
+<div class="pathfinding-wrapper">
+    <div class="pathfinding-container">
+        {% for i in number_of_points %}
+
+        <div class="point-array" id="{{i}}" onclick="change_color_of_point('{{ i }}')"> </div>
+
+        {% endfor %}
+    </div>
+    <button onclick="change_color('green')" class="pathfinding-button" id="start">START</button>
+    <button onclick="change_color('red')" class="pathfinding-button" id="end">END</button>
+    <button onclick="generate_board()" class="pathfinding-button" id="reset">RESET</button>
+    <button onclick="change_color('grey')" class="pathfinding-button" id="obstacle">OBSTACLE</button>
+
+
+    <select name="algorithms" id="algodropdown" class="pathfinding-button">
+        <option value=" ">Select</option>
+        <option value="astar">A-star</option>
+        <option value="djikstra">Djikstras</option>
+    </select>
+    <button class="pathfinding-button" id="algorun" onclick="choosen_algorithm()">RUN</button>
+
+</div>
+{% endblock %}

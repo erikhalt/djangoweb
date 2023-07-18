@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-djangoproject-prod
+  annotations:
+    cert-manager.io/issuer: letsencryptit-nginx
+spec:
+  rules:
+    - host: haltlair.se
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: djangoproject-prod-service
+                port:
+                  number: 80
+  tls:
+  - hosts:
+    - haltlair.se
+    secretName: letsencryptit-nginx
+
+  ingressClassName: nginx

@@ -20,5 +20,6 @@ from django.urls import include,path
 urlpatterns = [
     path("", include("homepage.urls")),
     path("weatherapi", include("weatherapi.urls")),
-    path("sorting", include("sortingalgo.urls"))
+    path("sorting", include("sortingalgo.urls")),
+    path("pathfinding", include("pathfinding.urls")),
 ]

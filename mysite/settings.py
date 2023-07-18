@@ -46,6 +46,7 @@ ALLOWED_HOSTS = allowed_host
 # Application definition
 
 INSTALLED_APPS = [
+    'pathfinding.apps.PathfindingConfig',
     'sortingalgo.apps.SortingalgoConfig',
     'homepage.apps.HomepageConfig',
     'weatherapi.apps.WeatherapiConfig',
@@ -139,8 +140,11 @@ import os
 
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]  
-STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = [BASE_DIR / "static"]
+if (os.getenv('STATIC_ROOT_ENV', 'False') == 'True'):
+    STATIC_ROOT = BASE_DIR / 'static'
+else:
+    pass
 
 
 # Default primary key field type

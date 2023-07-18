@@ -1,0 +1,73 @@
+.pathfinding-wrapper {
+    width: 66%;
+    height: 66%;
+    top: 15%;
+    bottom: 15%;
+    left: 15%;
+    right: 15%;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.534);
+    border-radius: 5px;
+    padding: 2%;
+
+}
+
+.pathfinding-container {
+    position: relative;
+    width: 100%;
+    height: 90%;
+    background-color: black;
+    bottom: 10%;
+    top: 0%;
+}
+
+.point-array {
+    background-color: white;
+    position: absolute;
+    border: 1px solid black;
+}
+
+.pathfinding-button {
+    position: absolute;
+    width: 10%;
+    height: 5%;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0);
+    border: 1px solid black;
+    color: black;
+}
+
+.pathfinding-button:hover {
+    background-color: black;
+    color: white;
+}
+
+#start {
+    right: 2.5%;
+    bottom: 8%;
+}
+
+#end {
+    right: 2.5%;
+    bottom: 2%;
+}
+
+#obstacle {
+    bottom: 2%;
+    right: 15%;
+}
+
+#reset {
+    bottom: 2%;
+    left: 3%;
+}
+
+#algodropdown {
+    left: 45%;
+    bottom: 8%;
+}
+
+#algorun {
+    left: 45%;
+    bottom: 2%;
+}
