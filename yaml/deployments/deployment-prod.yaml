@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: djangoproject-prod-deployment
+  labels:
+    app.kubernetes.io/name: djangoproject-prod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: djangoproject-prod
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: djangoproject-prod
+    spec:
+      containers:
+      - name: djangoproject-prod
+        image: registry.digitalocean.com/erikregistry/djangoproject:latest
+        ports:
+        - containerPort: 5000
+        env:
+            - name: DEBUG
+              value: 'False'
+            - name: ALLOWED_HOST
+              value: 'haltlair.se'
