@@ -1,4 +1,4 @@
-name: Publish Docker image
+name: prod image deploy
 
 on:
   release:
@@ -9,7 +9,7 @@ on:
 env:
   PROJECT_NAME: djangoproject
   TAG: $(git rev-parse --short "$GITHUB_SHA")-prod
-  DEPLOYMENT_NAME: djangoproject-prod-deployment
+  DEPLOYMENT_NAME: djangoproject-deployment
   NAMESPACE: prod
 jobs:
   push_to_registry:

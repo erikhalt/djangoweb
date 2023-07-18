@@ -41,6 +41,6 @@ jobs:
           NAMESPACE: ${{ inputs.namespaces }}
 
       - name: Verify deployment
-        run: kubectl rollout status deployment/djangoproject -n $NAMESPACE
+        run: kubectl rollout status deployment/djangoproject-deployment -n $NAMESPACE
         env:
           NAMESPACE: ${{ inputs.namespaces }}
