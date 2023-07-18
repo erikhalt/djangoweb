@@ -1,0 +1,11 @@
+enviroment: prod
+appname: djangoproject-prod
+deploymentname: djangoproject-prod-deployment
+image: registry.digitalocean.com/erikregistry/djangoproject:latest
+imagePort: 5000
+
+issuerSecretName: letsencryptit-nginx
+envar:
+    debug: 'False'
+    host: haltlair.se
+    
