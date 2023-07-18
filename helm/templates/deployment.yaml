@@ -21,7 +21,7 @@ spec:
         - containerPort: {{ .Values.imagePort }}
         env:
             - name: DEBUG
-              value: {{ .Values.envar.debug }}
+              value: {{ .Values.envar.debug | quote }}
             - name: ALLOWED_HOST
               value: {{ .Values.envar.host }}
             - name: STATIC_ROOT
