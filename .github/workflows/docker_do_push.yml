@@ -6,6 +6,7 @@ on:
       - 'dev'
 env:
   PROJECT_NAME: djangoproject
+  NAMESPACE: dev
 jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
@@ -61,7 +62,7 @@ jobs:
         run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 clustermedrasmus
 
       - name: Update deployment
-        run: kubectl set image deployment/djangoproject-deployment djangoproject=registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:$(git rev-parse --short "$GITHUB_SHA")
+        run: kubectl set image deployment/djangoproject-deployment djangoproject=registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:$(git rev-parse --short "$GITHUB_SHA") -n ${{ env.NAMESPACE }}
         
       - name: Verify deployment
-        run: kubectl rollout status deployment/djangoproject-deployment
+        run: kubectl rollout status deployment/djangoproject-deployment -n ${{ env.NAMESPACE }}
