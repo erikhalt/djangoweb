@@ -22,7 +22,7 @@ jobs:
       - name: Install doctl 
         uses: digitalocean/action-doctl@v2
         with:
-          token: ${{ secrets.DO_API_KEY }}
+          token: ${{ secrets.DO_REGISTRY_KEY }}
 
       - name: Save DigitalOcean kubeconfig with short-lived credentials
         run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 clustermedrasmus
