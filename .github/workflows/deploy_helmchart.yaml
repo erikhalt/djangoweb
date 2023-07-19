@@ -1,16 +1,17 @@
-name: prod image deploy
+name: Deploy Helmchart
 
 on:
-  release:
-    types: [published]
-    branches:
-      - 'main'
-  
+  workflow_dispatch:
+    inputs:
+      namespaces:
+        description: 'Namespace to deploy to'
+        required: true
+        default: 'default'
+        type: choice
+        options:
+        - dev
+        - prod 
 
-env:
-  PROJECT_NAME: djangoproject
-  DEPLOYMENT_NAME: djangoproject-deployment
-  NAMESPACE: prod
 jobs:
   deploy_the_thing:
     runs-on: ubuntu-latest
@@ -26,22 +27,20 @@ jobs:
       - name: Save DigitalOcean kubeconfig with short-lived credentials
         run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 clustermedrasmus
 
-
       - name: Install Helmchart
         uses: azure/setup-helm@v3
          
       - name: Generate Kubernetes manifest from Helmchart
-        run: helm template helm -f helm/values.${{ env.NAMESPACE }}.yaml > out.yaml
+        run: helm template helm -f helm/values.$NAMESPACE.yaml > out.yaml
         env:
-          NAMESPACE: ${{ env.NAMESPACE }}
+          NAMESPACE: ${{ inputs.namespaces }}
 
       - name: Deploy to DigitalOcean Kubernetes
-        run: kubectl apply -f out.yaml -n ${{ env.NAMESPACE }}
+        run: kubectl apply -f out.yaml -n $NAMESPACE
         env:
-          NAMESPACE: ${{ env.NAMESPACE }}
-
+          NAMESPACE: ${{ inputs.namespaces }}
 
       - name: Verify deployment
-        run: kubectl rollout status deployment/${{ env.DEPLOYMENT_NAME }} -n ${{ env.NAMESPACE }}
+        run: kubectl rollout status deployment/djangoproject-deployment -n $NAMESPACE
         env:
-          NAMESPACE: ${{ env.NAMESPACE }}
+          NAMESPACE: ${{ inputs.namespaces }}
