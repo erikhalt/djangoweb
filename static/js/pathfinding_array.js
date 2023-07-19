@@ -59,9 +59,11 @@ function astar_algo() {
 
 }
 
+
+
 var dijkstra_array;
 
-function djikstra_algo() {
+async function djikstra_algo() {
     solution_found = false;
     class Node {
         constructor(i, j, element) {
@@ -118,8 +120,8 @@ function djikstra_algo() {
             return
         }
         for (const c of openSet) {
-            console.log('draw')
-            c.element.style.backgroundColor = 'lightblue'
+            console.log('draw open')
+            c.element.style.backgroundColor = 'darkblue'
         }
     }
 
@@ -129,43 +131,110 @@ function djikstra_algo() {
             return
         }
         for (const c of closedSet) {
-            c.element.style.backgroundColor = 'blue'
+            console.log('draw closed')
+            c.element.style.backgroundColor = 'purple'
         }
     }
     // Start the algorithm
 
-    if (start_i < columns - 1) {
-        openSet.push(dijkstra_array[start_i + 1][start_j])
-        dijkstra_array[start_i + 1][start_j].G = 10
-    }
-    if (start_i > 0) {
-        openSet.push(dijkstra_array[start_i - 1][start_j])
-        dijkstra_array[start_i - 1][start_j].G = 10
-    }
 
-    if (start_j < columns - 1) {
-        openSet.push(dijkstra_array[start_i][start_j + 1])
-        dijkstra_array[start_i][start_j + 1].G = 10
-    }
-    if (start_j > 0) {
-        openSet.push(dijkstra_array[start_i][start_j - 1])
-        dijkstra_array[start_i][start_j - 1].G = 10
-    }
 
-    while (solution_found != true) {
-        for (i = 0; i < openSet.length; i++) {
-            if (openSet[i].obstacle == true) {
-                openSet.splice(i, 1);
+    for (j = 0; solution_found == false; j++) {
+
+        if (openSet.length > 0) {
+            console.log('it2')
+
+
+            closedSet.push(openSet.slice()[0])
+            openSet = []
+
+
+            for (i = 0; i < closedSet.length; i++) {
+
+                if (closedSet[i].i < columns - 1) {
+                    if (closedSet.includes(dijkstra_array[closedSet[i].i + 1][closedSet[i].j])) { }
+                    else {
+                        openSet.push(dijkstra_array[closedSet[i].i + 1][closedSet[i].j])
+                        dijkstra_array[closedSet[i].i + 1][closedSet[i].j].G = 10 * j
+                    }
+                }
+                if (closedSet[i].i > 0) {
+                    if (closedSet.includes(dijkstra_array[closedSet[i].i - 1][closedSet[i].j])) { }
+                    else {
+                        openSet.push(dijkstra_array[closedSet[i].i - 1][closedSet[i].j])
+                        dijkstra_array[closedSet[i].i - 1][closedSet[i].j].G = 10 * j
+                    }
+                }
+
+                if (closedSet[i].j < columns - 1) {
+                    if (closedSet.includes(dijkstra_array[closedSet[i].i][closedSet[i].j + 1])) { }
+                    else {
+                        openSet.push(dijkstra_array[closedSet[i].i][closedSet[i].j + 1])
+                        dijkstra_array[closedSet[i].i][closedSet[i].j + 1].G = 10 * j
+                    }
+                }
+                if (closedSet[i].j > 0) {
+                    if (closedSet.includes(dijkstra_array[closedSet[i].i][closedSet[i].j - 1])) { }
+                    else {
+                        openSet.push(dijkstra_array[closedSet[i].i][closedSet[i].j - 1])
+                        dijkstra_array[closedSet[i].i][closedSet[i].j - 1].G = 10 * j
+                    }
+                }
+
+            }
+
+
+        }
+        else if (j == 0) {
+            console.log('start it1')
+            if (start_i < columns - 1) {
+                openSet.push(dijkstra_array[start_i + 1][start_j])
+                dijkstra_array[start_i + 1][start_j].G = 10 * j
+            }
+            if (start_i > 0) {
+                openSet.push(dijkstra_array[start_i - 1][start_j])
+                dijkstra_array[start_i - 1][start_j].G = 10 * j
+            }
+
+            if (start_j < columns - 1) {
+                openSet.push(dijkstra_array[start_i][start_j + 1])
+                dijkstra_array[start_i][start_j + 1].G = 10 * j
+            }
+            if (start_j > 0) {
+                openSet.push(dijkstra_array[start_i][start_j - 1])
+                dijkstra_array[start_i][start_j - 1].G = 10 * j
             }
         }
+
+        for (i = 0; i < openSet.length; i++) {
+            console.log('remove obstacle openset')
+            if (openSet[i].obstacle == true) {
+                openSet.splice(i, 1);
+            } else if (openSet[i].start == true) {
+                openSet.slice(i, 1)
+            } else if (openSet[i].end == true) {
+                openSet.slice(i, 1)
+            }
+        }
+
+        for (i = 0; i < closedSet.length; i++) {
+            if (closedSet[i].start == true) {
+                closedSet.slice(i, 1)
+            }
+            else if (closedSet[i].end == true) {
+                closedSet.slice(i, 1)
+            }
+        }
+
         draw_openset();
         draw_closedset();
-        solution_found = true;
+
+        await sleepNow(10)
+        if (j > 15) {
+            solution_found = true
+        }
 
     }
-
-
-
 }
 
 
