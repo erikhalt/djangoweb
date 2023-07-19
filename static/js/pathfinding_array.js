@@ -77,10 +77,12 @@ async function djikstra_algo() {
 
             if (this.element.style.backgroundColor == 'green') {
                 this.start = true;
+
             };
 
             if (this.element.style.backgroundColor == 'red') {
                 this.end = true;
+
             };
 
             if (this.element.style.backgroundColor == 'grey') {
@@ -137,7 +139,7 @@ async function djikstra_algo() {
     }
     // Start the algorithm
 
-
+    var end_pointfound = false
 
     for (j = 0; solution_found == false; j++) {
 
@@ -152,14 +154,19 @@ async function djikstra_algo() {
             for (i = 0; i < closedSet.length; i++) {
 
                 if (closedSet[i].i < columns - 1) {
-                    if (closedSet.includes(dijkstra_array[closedSet[i].i + 1][closedSet[i].j])) { }
+                    if (closedSet.includes(dijkstra_array[closedSet[i].i + 1][closedSet[i].j]) || dijkstra_array[closedSet[i].i + 1][closedSet[i].j].obstacle == true) { }
+                    else if (dijkstra_array[closedSet[i].i + 1][closedSet[i].j].start == true) { }
+                    else if (dijkstra_array[closedSet[i].i + 1][closedSet[i].j].end == true) { end_pointfound = true }
                     else {
                         openSet.push(dijkstra_array[closedSet[i].i + 1][closedSet[i].j])
                         dijkstra_array[closedSet[i].i + 1][closedSet[i].j].G = 10 * j
                     }
                 }
+
                 if (closedSet[i].i > 0) {
-                    if (closedSet.includes(dijkstra_array[closedSet[i].i - 1][closedSet[i].j])) { }
+                    if (closedSet.includes(dijkstra_array[closedSet[i].i - 1][closedSet[i].j]) || dijkstra_array[closedSet[i].i - 1][closedSet[i].j].obstacle == true) { }
+                    else if (dijkstra_array[closedSet[i].i - 1][closedSet[i].j].start == true) { }
+                    else if (dijkstra_array[closedSet[i].i - 1][closedSet[i].j].end == true) { end_pointfound = true }
                     else {
                         openSet.push(dijkstra_array[closedSet[i].i - 1][closedSet[i].j])
                         dijkstra_array[closedSet[i].i - 1][closedSet[i].j].G = 10 * j
@@ -167,14 +174,19 @@ async function djikstra_algo() {
                 }
 
                 if (closedSet[i].j < columns - 1) {
-                    if (closedSet.includes(dijkstra_array[closedSet[i].i][closedSet[i].j + 1])) { }
+                    if (closedSet.includes(dijkstra_array[closedSet[i].i][closedSet[i].j + 1]) || dijkstra_array[closedSet[i].i][closedSet[i].j + 1].obstacle == true) { }
+                    else if (dijkstra_array[closedSet[i].i][closedSet[i].j + 1].start == true) { }
+                    else if (dijkstra_array[closedSet[i].i][closedSet[i].j + 1].end == true) { end_pointfound = true }
                     else {
                         openSet.push(dijkstra_array[closedSet[i].i][closedSet[i].j + 1])
                         dijkstra_array[closedSet[i].i][closedSet[i].j + 1].G = 10 * j
                     }
                 }
+
                 if (closedSet[i].j > 0) {
-                    if (closedSet.includes(dijkstra_array[closedSet[i].i][closedSet[i].j - 1])) { }
+                    if (closedSet.includes(dijkstra_array[closedSet[i].i][closedSet[i].j - 1]) || dijkstra_array[closedSet[i].i][closedSet[i].j - 1].obstacle == true) { }
+                    else if (dijkstra_array[closedSet[i].i][closedSet[i].j - 1].start == true) { }
+                    else if (dijkstra_array[closedSet[i].i][closedSet[i].j - 1].end == true) { end_pointfound = true }
                     else {
                         openSet.push(dijkstra_array[closedSet[i].i][closedSet[i].j - 1])
                         dijkstra_array[closedSet[i].i][closedSet[i].j - 1].G = 10 * j
@@ -204,36 +216,30 @@ async function djikstra_algo() {
                 openSet.push(dijkstra_array[start_i][start_j - 1])
                 dijkstra_array[start_i][start_j - 1].G = 10 * j
             }
-        }
+            for (i = 0; i < openSet.length; i++) {
+                console.log('remove obstacle openset')
+                if (openSet[i].obstacle == true) {
+                    openSet.splice(i, 1);
+                }
 
-        for (i = 0; i < openSet.length; i++) {
-            console.log('remove obstacle openset')
-            if (openSet[i].obstacle == true) {
-                openSet.splice(i, 1);
-            } else if (openSet[i].start == true) {
-                openSet.slice(i, 1)
-            } else if (openSet[i].end == true) {
-                openSet.slice(i, 1)
             }
         }
 
-        for (i = 0; i < closedSet.length; i++) {
-            if (closedSet[i].start == true) {
-                closedSet.slice(i, 1)
-            }
-            else if (closedSet[i].end == true) {
-                closedSet.slice(i, 1)
-            }
-        }
+
 
         draw_openset();
         draw_closedset();
 
-        await sleepNow(10)
-        if (j > 15) {
+        await sleepNow(0)
+        if (end_pointfound == true) {
+            while (solution_found != true) {
+                if (closedSet.includes(dijkstra_array[end_i + 1][end_j])) {
+
+                }
+            }
+
             solution_found = true
         }
-
     }
 }
 

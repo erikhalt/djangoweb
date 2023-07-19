@@ -7,7 +7,4 @@ def pathfinding(request):
     for i in range(2500):
         number_of_points.append(i)
 
-  
-
-
     return render(request,"pathfinding.html",{'number_of_points':number_of_points})
