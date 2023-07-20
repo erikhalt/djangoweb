@@ -63,6 +63,32 @@ function astar_algo() {
 
 var dijkstra_array;
 
+function draw_openset() {
+    if (openSet.length == 0) {
+        return
+    }
+    for (const c of openSet) {
+        console.log('draw open')
+        c.element.style.backgroundColor = 'darkblue'
+    }
+}
+
+function draw_closedset() {
+
+    if (closedSet.length == 0) {
+        return
+    }
+    for (const c of closedSet) {
+        console.log('draw closed')
+        c.element.style.backgroundColor = 'purple'
+    }
+}
+
+
+function draw_backtracking(node) {
+    node.element.style.backgroundColor = 'yellow'
+}
+
 async function djikstra_algo() {
     solution_found = false;
     class Node {
@@ -117,26 +143,9 @@ async function djikstra_algo() {
         }
     }
 
-    function draw_openset() {
-        if (openSet.length == 0) {
-            return
-        }
-        for (const c of openSet) {
-            console.log('draw open')
-            c.element.style.backgroundColor = 'darkblue'
-        }
-    }
 
-    function draw_closedset() {
 
-        if (closedSet.length == 0) {
-            return
-        }
-        for (const c of closedSet) {
-            console.log('draw closed')
-            c.element.style.backgroundColor = 'purple'
-        }
-    }
+
     // Start the algorithm
 
     var end_pointfound = false
@@ -231,15 +240,53 @@ async function djikstra_algo() {
         draw_closedset();
 
         await sleepNow(0)
-        if (end_pointfound == true) {
-            while (solution_found != true) {
-                if (closedSet.includes(dijkstra_array[end_i + 1][end_j])) {
 
-                }
+        if (end_pointfound == true) {
+            //start backwards
+            if (closedSet.includes(dijkstra_array[end_i - 1][end_j])) {
+                var backtracking = dijkstra_array[end_i - 1][end_j]
+            }
+            else if (closedSet.includes(dijkstra_array[end_i + 1][end_j])) {
+                var backtracking = dijkstra_array[end_i + 1][end_j]
+            }
+            else if (closedSet.includes(dijkstra_array[end_i][end_j - 1])) {
+                var backtracking = dijkstra_array[end_i][end_j - 1]
+            }
+            else if (closedSet.includes(dijkstra_array[end_i][end_j + 1])) {
+                var backtracking = dijkstra_array[end_i][end_j + 1]
             }
 
-            solution_found = true
+            while (solution_found != true) {
+                draw_backtracking(backtracking);
+                var g = backtracking;
+                if (dijkstra_array[backtracking.i + 1][backtracking.j].start == true || dijkstra_array[backtracking.i - 1][backtracking.j].start == true ||
+                    dijkstra_array[backtracking.i][backtracking.j + 1].start == true || dijkstra_array[backtracking.i][backtracking.j - 1].start == true) {
+                    console.log('done')
+                    break;
+                }
+                if (closedSet.includes(dijkstra_array[backtracking.i + 1][backtracking.j])) {
+                    g = dijkstra_array[backtracking.i + 1][backtracking.j]
+                }
+                if (closedSet.includes(dijkstra_array[backtracking.i - 1][backtracking.j]) && dijkstra_array[backtracking.i - 1][backtracking.j].G < g.G) {
+                    g = dijkstra_array[backtracking.i - 1][backtracking.j]
+                }
+                if (closedSet.includes(dijkstra_array[backtracking.i][backtracking.j + 1]) && dijkstra_array[backtracking.i][backtracking.j + 1].G < g.G) {
+                    g = dijkstra_array[backtracking.i][backtracking.j + 1]
+                }
+                if (closedSet.includes(dijkstra_array[backtracking.i][backtracking.j - 1]) && dijkstra_array[backtracking.i][backtracking.j - 1].G < g.G) {
+                    g = dijkstra_array[backtracking.i][backtracking.j - 1]
+                }
+
+                backtracking = g
+                await sleepNow(10)
+
+
+
+            }
+
+            break
         }
+
     }
 }
 
