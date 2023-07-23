@@ -1,6 +1,7 @@
 # djangoweb
-An ongoing djangoproject.
+An ongoing djangoproject in kubernetes with workflows and helmcharts.
 Were i collect all my projects and my info.
+
 
 https://haltlair.se/  
 
