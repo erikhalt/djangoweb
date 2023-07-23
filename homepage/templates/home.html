@@ -1,23 +1,32 @@
 {% extends "Base.html" %}
+{% load static %}
 
+{% block title%}
+HOME
+{% endblock%}
 
 
 {% block content %}
+<div class="row h-100 m-0 p-5">
+    <div class="container bg-dark position-relative w-75 h-75 info-wrapper p-2 justify-content-center overflow-auto">
+        <h1 class="position-relative info-text">Hello!</h1>
+        <p class="position-relative info-text">
+            Welcome to my Djangoproject <br>
+            This project is built with django and kubernetes. <br>
+            Aswell as a full pipeline with workflows and helmcharts. <br>
+            Under the projects dropdown you will find some of my projects, <br>
+            <br>
+            <br>
+            Don't hesitate to contact me if you got any questions <br>
+            You can find my contact info under "About me" <br>
+            <br>
+            With Kind Regards Erik.
 
-<div class="content-wrapper" id="info-display">
-    <h1>testtest</h1>
+        </p>
+    </div>
 </div>
-
 {% endblock %}
 
 {% block bottomnav %}
-<div class="col">
-</div>
-<div class="col">
-    <button type="button" class="btn btn-outline-info homeinfo">Info</button>
-</div>
-<div class="col">
-</div>
-
 
 {% endblock %}

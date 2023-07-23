@@ -13,6 +13,10 @@ text {
     font: papyrus;
 }
 
+.info-text {
+    color: rgba(255, 255, 255, .55);
+}
+
 .content-wrapper {
     width: 70%;
     height: 70%;
@@ -26,12 +30,9 @@ text {
 
 }
 
-#info-display {
-    display: none;
-}
-
-.homeinfo:hover+#info-display {
-    display: block;
+.info-wrapper {
+    border-radius: 15px;
+    box-shadow: 20px 20px 2px 1px rgba(0, 0, 0, 0.32);
 }
 
 
