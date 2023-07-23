@@ -48,10 +48,18 @@ function choosen_algorithm() {
     if (algo == " ") {
         return
     }
-    else if (algo != " ") {
-        console.log(algo)
+    else if (algo == "djikstra") {
+        djikstra_algo()
+    }
+    else if (algo == "astar") {
+        astar_algo()
     }
 }
+
+
+
+
+
 
 
 
