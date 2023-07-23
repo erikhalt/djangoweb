@@ -46,6 +46,7 @@ ALLOWED_HOSTS = allowed_host
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap5',
     'pathfinding.apps.PathfindingConfig',
     'sortingalgo.apps.SortingalgoConfig',
     'homepage.apps.HomepageConfig',
