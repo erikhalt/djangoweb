@@ -17,6 +17,13 @@ text {
     color: rgba(255, 255, 255, .55);
 }
 
+
+.footernav {
+    border-top: 1px solid black;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
 .content-wrapper {
     width: 70%;
     height: 70%;

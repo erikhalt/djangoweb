@@ -7,7 +7,7 @@ HOME
 
 
 {% block content %}
-<div class="row h-100 m-0 p-5">
+<div class="row h-50 m-0 p-0 static-top bg-secondary">
     <div class="container bg-dark position-relative w-75 h-75 info-wrapper p-2 justify-content-center overflow-auto">
         <h1 class="position-relative info-text">Hello!</h1>
         <p class="position-relative info-text">
@@ -24,6 +24,40 @@ HOME
 
         </p>
     </div>
+</div>
+<div class="container-fluid m-0 p-0">
+    <div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+        </div>
+
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="container mx-auto"></div>
+                    </div>
+                    <div class="col-6">
+                        <div class="container mx-auto"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
 </div>
 {% endblock %}
 

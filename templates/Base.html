@@ -33,8 +33,7 @@
     <script src="{% static 'js/astar.js' %}"></script>
 </head>
 
-<body class="d-flex flex-column">
-    <img id="bg" class="position-absolute img-fluid w-100 h-100" src="{% static 'img/background.jpg' %}" alt="">
+<body class="d-flex flex-column bg-light">
     <header>
         <div class="container-fluid m-0 p-0">
             <nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar-static-top">
@@ -89,13 +88,13 @@
 
 
     <footer>
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar-static-bottom">
+        <div class="container-fluid h-10 p-1 m-0 fixed-bottom bg-dark footernav">
             <div class="container-fluid w-100">
                 <ul class="navbar-nav w-100">
                     <div class="row w-100">
                         <div class="col-4">
                             <li class="nav-item">
-                                <h5 class="nav-link active" href="#"><i class='bx bx-copyright'></i> Made By Erik
+                                <h5 class="text-secondary"><i class='bx bx-copyright'></i> Made By Erik
                                 </h5>
                             </li>
                         </div>
@@ -110,7 +109,7 @@
                     </div>
                 </ul>
             </div>
-        </nav>
+        </div>
     </footer>
 
 </body>
