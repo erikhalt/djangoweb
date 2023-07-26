@@ -17,24 +17,34 @@ text {
     color: rgba(255, 255, 255, .55);
 }
 
-.content-wrapper {
-    width: 70%;
-    height: 70%;
-    top: 15%;
-    bottom: 15%;
-    left: 15%;
-    right: 15%;
-    position: relative;
-    background-color: rgba(255, 255, 255, 0.534);
-    border-radius: 5px;
+
+.footernav {
+    border-top: 1px solid black;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+
+
+.img-divs img {
+    width: 60;
+    object-fit: cover;
+    image-resolution: from-image;
+    margin: auto;
+    min-width: 100px;
+}
+
+
+
+.img-rows div {
+    min-width: 100px;
 
 }
 
-.info-wrapper {
-    border-radius: 15px;
-    box-shadow: 20px 20px 2px 1px rgba(0, 0, 0, 0.32);
+.img-wrap {
+    margin-left: 15%;
+    margin-right: 15%;
 }
-
 
 
 

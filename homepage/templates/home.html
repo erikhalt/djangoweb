@@ -7,14 +7,16 @@ HOME
 
 
 {% block content %}
-<div class="row h-100 m-0 p-5">
-    <div class="container bg-dark position-relative w-75 h-75 info-wrapper p-2 justify-content-center overflow-auto">
-        <h1 class="position-relative info-text">Hello!</h1>
-        <p class="position-relative info-text">
+<div class="row h-50 m-0 p-0 static-top bg-secondary overflow-auto">
+    <div class="container mx-auto welcome-text-h1 m-1">
+        <h1 class="text-white text-center">Welcome!</h1>
+    </div>
+    <div class="container mx-auto welcome-text-p m-1">
+        <p class="text-white text-center">
             Welcome to my Djangoproject <br>
             This project is built with django and kubernetes. <br>
             Aswell as a full pipeline with workflows and helmcharts. <br>
-            Under the projects dropdown you will find some of my projects, <br>
+            Under the projects dropdown you will find some of my projects. <br>
             <br>
             <br>
             Don't hesitate to contact me if you got any questions <br>
@@ -24,6 +26,86 @@ HOME
 
         </p>
     </div>
+
+</div>
+<div class="row h-50 my-0 p-0 img-wrap">
+
+    <div class="row h-50 p-0 m-0 img-rows overflow-x-auto">
+
+        <div class="col-md-2 col-4 p-2">
+            <div class="container img-divs">
+                <img src="{% static 'img/djangologo.png' %}" class="img-fluid mx-auto d-block" alt="">
+            </div>
+        </div>
+
+        <div class="col-md-2 col-4 p-2">
+            <div class="container img-divs">
+                <img src="{% static 'img/kuberneteslogo.png' %}" class="img-fluid mx-auto d-block" alt="">
+            </div>
+        </div>
+
+        <div class="col-md-2 col-4 p-2">
+            <div class="container img-divs">
+                <img src="{% static 'img/helmlogo.png' %}" class="img-fluid mx-auto d-block" alt="">
+            </div>
+        </div>
+
+        <div class="col-md-2 col-4 p-2">
+            <div class="container img-divs">
+                <img src="{% static 'img/githublogo.png' %}" class="img-fluid mx-auto d-block" alt="">
+            </div>
+        </div>
+
+        <div class="col-md-2 col-4 p-2">
+            <div class="container img-divs">
+                <img src="{% static 'img/mysqllogo.png' %}" class="img-fluid mx-auto d-block" alt="">
+            </div>
+        </div>
+
+        <div class="col-md-2 col-4 p-2">
+            <div class="container img-divs">
+                <img src="{% static 'img/bootstraplogo.svg' %}" class="img-fluid mx-auto d-block" alt="">
+            </div>
+        </div>
+
+        <div class="col-md-2 col-4 p-2">
+            <div class="container img-divs">
+                <img src="{% static 'img/digitaloceanlogo.svg' %}" class="img-fluid mx-auto d-block" alt="">
+            </div>
+        </div>
+
+        <div class="col-md-2 col-4 p-2">
+            <div class="container img-divs">
+                <img src="{% static 'img/dockerlogo.png' %}" class="img-fluid mx-auto d-block" alt="">
+            </div>
+        </div>
+
+        <div class="col-md-2 col-4 p-2">
+            <div class="container img-divs">
+                <img src="{% static 'img/pythonlogo.png' %}" class="img-fluid mx-auto d-block" alt="">
+            </div>
+        </div>
+
+        <div class="col-md-2 col-4 p-2">
+            <div class="container img-divs">
+                <img src="{% static 'img/jslogo.png' %}" class="img-fluid mx-auto d-block" alt="">
+            </div>
+        </div>
+
+        <div class="col-md-2 col-4 p-2">
+            <div class="container img-divs">
+                <img src="{% static 'img/htmllogo.png' %}" class="img-fluid mx-auto d-block" alt="">
+            </div>
+        </div>
+
+        <div class="col-md-2 col-4 p-2">
+            <div class="container img-divs">
+                <img src="{% static 'img/csslogo2.png' %}" class="img-fluid mx-auto d-block" alt="">
+            </div>
+        </div>
+
+    </div>
+
 </div>
 {% endblock %}
 
