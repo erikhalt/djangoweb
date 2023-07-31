@@ -1,7 +1,7 @@
 enviroment: prod
 appname: djangoproject
 deploymentname: djangoproject-deployment
-image: registry.digitalocean.com/erikregistry/djangoproject:73f78cd-prod
+image: registry.digitalocean.com/erikregistry/djangoproject:b9db6ea
 imagePort: 5000
 
 issuerSecretName: letsencryptit-nginx
