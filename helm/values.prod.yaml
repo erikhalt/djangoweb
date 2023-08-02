@@ -1,11 +1,22 @@
 enviroment: prod
 appname: djangoproject
 deploymentname: djangoproject-deployment
-image: registry.digitalocean.com/erikregistry/djangoproject:49b6c04
+image: registry.digitalocean.com/erikregistry/djangoproject:b9db6ea
 imagePort: 5000
 
 issuerSecretName: letsencryptit-nginx
 envar:
-    debug: 'True'  #QuickFix should be false
+    debug: 'True' 
     host: haltlair.se
+
+phpmyadmin:
+    fullnameOverride: "phpmyadmin"
+    db.host: mysql
+    enabled: false
+    host: db.haltlair.se
+
+mysql:
+    enabled: false
+    host: false
+
     
