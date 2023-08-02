@@ -31,14 +31,14 @@ jobs:
         uses: azure/setup-helm@v3
       
       - name: Helm dependency update   
-        run: helm dependency update myhelmchart/ -n $NAMESPACE
+        run: helm dependency update helm/ -n $NAMESPACE
         env:
-          NAMESPACE: ${{ inputs.namespaces }}
+          NAMESPACE: ${{ inputs.namespace }}
 
       - name: Set kubernetes namespace
         run: kubectl config set-context --current --namespace=$NAMESPACE
         env:
-          NAMESPACE: ${{ inputs.namespaces }}  
+          NAMESPACE: ${{ inputs.namespace }}  
          
       - name: Generate Kubernetes manifest from Helmchart
         run: helm template helm -f helm/values.$NAMESPACE.yaml > out.yaml
