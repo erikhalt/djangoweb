@@ -27,3 +27,4 @@ dependencies:
 - name: phpmyadmin
   version: 11.1.6
   repository: https://charts.bitnami.com/bitnami
+  condition: phpmyadmin.enabled

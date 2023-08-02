@@ -16,20 +16,24 @@ spec:
                 name: {{ .Values.appname }}-service
                 port:
                   number: 80
-    - host: devdb.haltlair.se
+{{ if .Values.phpmyadmin.enabled  }}
+    - host: {{ .Values.phpmyadmin.host }}
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: phpmyadmin
+                name: {{ .Values.phpmyadmin.fullnameOverride }}
                 port:
                   number: 80
+{{ end }}
   tls:
   - hosts:
     - {{ .Values.envar.host }}
-    - devdb.haltlair.se
+    {{ if .Values.phpmyadmin.enabled }}
+    - {{ .Values.phpmyadmin.host }}
+    {{ end }}
     secretName: {{ .Values.issuerSecretName }}
   
 
