@@ -11,7 +11,7 @@ spec:
     email: erikhalt@hotmail.com
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: IForgotIssuerAGAINphpmyadmin
+      name: phpmyadminkey
     solvers:
       # Use the HTTP-01 challenge provider
       - http01:

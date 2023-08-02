@@ -19,6 +19,6 @@ spec:
   tls:
   - hosts:
     - devdb.haltlair.se
-    secretName: IForgotIssuerAGAINphpmyadmin
+    secretName: phpmyadminkey
 
   ingressClassName: nginx
