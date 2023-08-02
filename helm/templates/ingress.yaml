@@ -16,9 +16,21 @@ spec:
                 name: {{ .Values.appname }}-service
                 port:
                   number: 80
+    - host: devdb.haltlair.se
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: phpmyadmin
+                port:
+                  number: 80
   tls:
   - hosts:
     - {{ .Values.envar.host }}
+    - devdb.haltlair.se
     secretName: {{ .Values.issuerSecretName }}
+  
 
   ingressClassName: nginx
