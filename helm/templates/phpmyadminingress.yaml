@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: phpmyadmin
+  annotations:
+    cert-manager.io/issuer: phpmyadmin
+spec:
+  rules:
+    - host: devdb.haltlair.se
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: phpmyadmin
+                port:
+                  number: 80
+  tls:
+  - hosts:
+    - devdb.haltlair.se
+    secretName: IForgotIssuerAGAINphpmyadmin
+
+  ingressClassName: nginx

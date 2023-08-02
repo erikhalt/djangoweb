@@ -25,5 +25,5 @@ appVersion: "1.0.0"
 
 dependencies:
 - name: phpmyadmin
-  version: 9.10.7
-  repository: https://charts.bitnami.com/bitnami/phpmyadmin
+  version: 11.1.6
+  repository: https://charts.bitnami.com/bitnami

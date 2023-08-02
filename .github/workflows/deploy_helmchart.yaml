@@ -29,6 +29,16 @@ jobs:
 
       - name: Install Helmchart
         uses: azure/setup-helm@v3
+      
+      - name: Helm dependency update   
+        run: helm dependency update myhelmchart/ -n $NAMESPACE
+        env:
+          NAMESPACE: ${{ inputs.namespaces }}
+
+      - name: Set kubernetes namespace
+        run: kubectl config set-context --current --namespace=$NAMESPACE
+        env:
+          NAMESPACE: ${{ inputs.namespaces }}  
          
       - name: Generate Kubernetes manifest from Helmchart
         run: helm template helm -f helm/values.$NAMESPACE.yaml > out.yaml

@@ -8,3 +8,7 @@ issuerSecretName: letsencrypt-nginx
 envar:
     debug: 'True'
     host: dev.haltlair.se
+
+phpmyadmin:
+    fullnameOverride: "phpmyadmin"
+    db.host: mysql
