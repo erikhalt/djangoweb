@@ -1,11 +1,10 @@
 enviroment: dev
 appname: djangoproject
 deploymentname: djangoproject-deployment
-image: registry.digitalocean.com/erikregistry/djangoproject:latest
+image: registry.digitalocean.com/erikregistry/djangoproject:49b6c04
 imagePort: 5000
 
 issuerSecretName: letsencrypt-nginx
 envar:
     debug: 'True'
     host: dev.haltlair.se
-    
