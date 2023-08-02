@@ -36,7 +36,7 @@ jobs:
           NAMESPACE: ${{ inputs.namespaces }}
 
       - name: Set kubernetes namespace
-        run: kubectl config set-context --current --namespaces=$NAMESPACE
+        run: kubectl config set-context --current --namespace=$NAMESPACE
         env:
           NAMESPACE: ${{ inputs.namespaces }}  
          
