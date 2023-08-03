@@ -4,10 +4,10 @@ RUN apk update
 RUN apk add pkgconfig
 RUN apk add mysql mysql-client
 COPY requirements.txt requirements.txt
-RUN apk add --no-cache --virtual build-deps gcc musl-dev libffi-dev2 pkgconf mariadb-dev && \
-    apk add --no-cache mariadb-connector-c-dev && \
-    pip install --no-cache-dir -r requirements.txt && \
-    apk del build-deps
+RUN apk add --no-cache gcc musl-dev  pkgconf mariadb-dev 
+RUN apk add --no-cache mariadb-connector-c-dev 
+RUN pip install --no-cache-dir -r requirements.txt 
+
 
 
 
