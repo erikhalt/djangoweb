@@ -102,18 +102,30 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+host = os.getenv('ALLOWED_HOST','*')
 
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        "NAME": "mysqldb",
-        "USER": "root",
-        "PASSWORD": "example",
-        "HOST": "localhost",
-        "PORT": "3306"
+if host != '*':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            "NAME": "mysql",
+            "USER": "root",
+            "PASSWORD": "djangodb",
+            "HOST": "mysql",
+            "PORT": "3306"
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            "NAME": "mysqldb",
+            "USER": "root",
+            "PASSWORD": "password",
+            "HOST": "localhost",
+            "PORT": "3306"
+        }
+    }
 
 
 
