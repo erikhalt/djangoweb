@@ -10,5 +10,5 @@ COPY . .
 RUN mkdir -p /static
 RUN mkdir -p /var/www/static
 
-
-CMD ["gunicorn"  , "-b", "0.0.0.0:5000", "mysite.wsgi"]
+RUN chmod +x entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
