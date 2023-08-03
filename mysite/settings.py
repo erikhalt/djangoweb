@@ -47,6 +47,7 @@ ALLOWED_HOSTS = allowed_host
 
 INSTALLED_APPS = [
     'bootstrap5',
+    'prm.apps.PrmConfig',
     'pathfinding.apps.PathfindingConfig',
     'sortingalgo.apps.SortingalgoConfig',
     'homepage.apps.HomepageConfig',
@@ -95,12 +96,25 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        "NAME": "mysqldb",
+        "USER": "root",
+        "PASSWORD": "example",
+        "HOST": "localhost",
+        "PORT": "3306"
     }
 }
+
 
 
 # Password validation
