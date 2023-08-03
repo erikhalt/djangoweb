@@ -17,4 +17,4 @@ RUN mkdir -p /static
 RUN mkdir -p /var/www/static
 
 RUN chmod +x entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
