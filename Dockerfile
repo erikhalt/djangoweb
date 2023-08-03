@@ -3,6 +3,7 @@ EXPOSE 5000
 RUN apk update
 RUN apk add pkgconfig
 RUN apk add mysql mysql-client
+RUN apk add python3-dev default-libmysqlclient-dev build-essential
 
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt --no-cache-dir
