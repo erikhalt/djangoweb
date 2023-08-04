@@ -103,7 +103,17 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 #     }
 # }
 host = os.getenv('ALLOWED_HOST','*')
-
+DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            "NAME": "mysqldb",
+            "USER": "root",
+            "PASSWORD": "password",
+            "HOST": "localhost",
+            "PORT": "3306"
+        }
+    }
+print('aaaa:   '+host)
 if host != '*':
     DATABASES = {
         'default': {
@@ -115,17 +125,8 @@ if host != '*':
             "PORT": "3306"
         }
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            "NAME": "mysqldb",
-            "USER": "root",
-            "PASSWORD": "password",
-            "HOST": "localhost",
-            "PORT": "3306"
-        }
-    }
+
+    
 
 
 
@@ -180,3 +181,8 @@ else:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None 
+
+LOGIN_REDIRECT_URL = "/prm"
+LOGOUT_REDIRECT_URL = "/prm"
+
+AUTH_USER_MODEL = 'prm.PRMuser'
