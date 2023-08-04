@@ -1,0 +1,17 @@
+{% extends "Base.html" %}
+
+
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="username" name="username">
+    <input type="password" name="password">
+    <input type="submit">
+</form>
+{% for error in errors %}
+<h1>{{error}}</h1>
+
+{% endfor %}
+
+{% endblock %}

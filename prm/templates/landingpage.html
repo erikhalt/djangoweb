@@ -1,8 +1,18 @@
 {% extends "Base.html" %}
-
+{% load static %}
 
 
 {% block content %}
-<h1>{{test}}</h1>
+
+{% if user.is_authenticated %}
+<a href="{% url 'projects' %}">Projects</a>
+<a href="{% url 'logoutview' %}">Logout</a>
+{% else %}
+
+<a href="{% url 'loginview' %}">Login</a>
+<a href="{% url 'signupview' %}">Signup</a>
+
+
+{% endif %}
 
 {% endblock %}
