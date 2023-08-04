@@ -118,7 +118,7 @@ if host != '*':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            "NAME": "mysql",
+            "NAME": "django",
             "USER": "root",
             "PASSWORD": "djangodb",
             "HOST": "mysql",
