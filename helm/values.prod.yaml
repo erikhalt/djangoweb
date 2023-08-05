@@ -9,6 +9,7 @@ envar:
     debug: 'True' 
     host: haltlair.se
 
+
 phpmyadmin:
     fullnameOverride: "phpmyadmin"
     db.host: mysql
@@ -19,4 +20,3 @@ mysql:
     enabled: false
     host: false
 
-    
