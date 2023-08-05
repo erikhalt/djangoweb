@@ -3,19 +3,39 @@
 
 
 {% block content %}
-<form action="" method="post">
-    {% csrf_token %}
-    username
-    <input type="username1" name="username">
-    password
-    <input type="password" name="password1">
-    password repeat
-    <input type="password" name="password2">
-    <input type="submit">
-</form>
 
-{% for error in errors %}
-<h1>{{error}}</h1>
-{% endfor %}
+{% if errorbool %}
+<div class="alert alert-dark">
+    {% for error in errors %}
+    <p>{{error}}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="card bg-primary bg-gradient text-white w-25 h-50 mx-auto m-0 p-0 mt-5 mb-5">
+    <div class="card-title">
+        <h3 class="text-center">Signup</h3>
+    </div>
+    <div class="card-body">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                <div class="row w-100 m-0 p-0">
+                    <input type="username" name="username" placeholder="Username" class="mx-auto w-50 mt-4">
+                </div>
+                <div class="row w-100 m-0 p-0">
+                    <input type="password" name="password1" placeholder="Password" class="mx-auto w-50 mt-3">
+                </div>
+                <div class="row w-100 m-0 p-0">
+                    <input type="password" name="password2" placeholder="Repeat Password" class="mx-auto w-50 mt-3">
+                </div>
+                <div class="row w-100 m-0 p-0">
+                    <button type="submit" class="w-50 mt-5 mx-auto">Create Account</button>
+                </div>
+            </div>
+    </div>
+    </form>
+</div>
+
 
 {% endblock %}
