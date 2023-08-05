@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .database.tables import PRMuser
+from .database.tables import PRMuser,Project,Task
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -37,12 +37,6 @@ def logoutview(request):
     return redirect('prmlandingpage')
 
 
-@login_required(login_url='loginview')
-def project(request):
-
-    return render(request,'projects.html')
-
-
 @csrf_exempt
 def signupview(request):
     error = []
@@ -72,3 +66,27 @@ def signupview(request):
         errorbool = False
 
     return render(request,"signup.html",{'errors':error,'errorbool':errorbool})
+
+
+@login_required(login_url='loginview')
+def project(request):
+    user = request.user
+    projects = Project.objects.filter(userfk_id = user.id)
+    return render(request,'projects.html',{'projects':projects})
+
+
+@login_required(login_url='loginview')
+def newproject(request):
+    user = request.user
+    if request.method == 'POST':
+        name = request.POST['name']
+        desc = request.POST['Description']
+
+        pr = Project()
+        pr.Name = name
+        pr.Description = desc
+        pr.userfk = PRMuser.objects.get(pk=user.id)
+        pr.save()
+
+        return redirect('projects')
+    return render(request,"newproject.html")

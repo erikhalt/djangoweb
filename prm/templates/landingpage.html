@@ -3,12 +3,12 @@
 
 
 
-{% if user.is_authenticated %}
 
 {% block content %}
 <a href="{% url 'projects' %}">Projects</a>
 {% endblock %}
 
+{% if user.is_authenticated %}
 {% block logout %}
 <a class="nav-link active" href="{% url 'logoutview' %}">Logout</a>
 {% endblock %}

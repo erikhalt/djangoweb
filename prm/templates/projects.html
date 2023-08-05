@@ -1,8 +1,19 @@
 {% extends "Base.html" %}
 
+{% if user.is_authenticated %}
+{% block logout %}
+<a class="nav-link active" href="{% url 'logoutview' %}">Logout</a>
+{% endblock %}
 
+{% endif %}
 
 {% block content %}
-<h1>Projects</h1>
 
+{% for project in projects%}
+<p>{{project.Name}}</p>
+{% endfor %}
+
+
+
+<a href="{% url 'createproject' %}">Create project</a>
 {% endblock %}
