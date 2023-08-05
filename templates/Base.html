@@ -72,6 +72,15 @@
                             <a class="nav-link" href="https://www.linkedin.com/in/erik-h-063041100/" target="_blank"><i
                                     class='bx bxl-linkedin-square'></i> Linkedin</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'prmlandingpage' %}">ProjectPlanner</a>
+                        </li>
+                        <li class="nav-item">
+                            {% block logout %}
+
+                            {% endblock %}
+                        </li>
+
                     </ul>
                 </div>
             </nav>
@@ -88,7 +97,7 @@
 
 
     <footer>
-        <div class="container-fluid h-10 p-1 m-0 fixed-bottom bg-dark footernav">
+        <div class="container-fluid h-10 p-1 m-0 fixed-bottom bg-dark bg-gradient footernav">
             <div class="container-fluid w-100">
                 <ul class="navbar-nav w-100">
                     <div class="row w-100">

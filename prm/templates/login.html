@@ -3,15 +3,47 @@
 
 
 {% block content %}
-<form action="" method="post">
-    {% csrf_token %}
-    <input type="username" name="username">
-    <input type="password" name="password">
-    <input type="submit">
-</form>
-{% for error in errors %}
-<h1>{{error}}</h1>
 
-{% endfor %}
+{% if errorbool %}
+<div class="alert alert-dark">
+    {% for error in errors %}
+    <p>{{error}}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="card bg-primary bg-gradient text-white w-25 h-50 mx-auto m-0 p-0 mt-5 mb-5">
+    <div class="card-title">
+        <h3 class="text-center">Welcome please login</h3>
+    </div>
+    <div class="card-body">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                <div class="row w-100 m-0 p-0">
+                    <input type="username" name="username" placeholder="Username" class="mx-auto w-50 mt-4">
+                </div>
+                <div class="row w-100 m-0 p-0">
+                    <input type="password" name="password" placeholder="Password" class="mx-auto w-50 mt-3">
+                </div>
+                <div class="row w-100 m-0 p-0">
+                    <button type="submit" class="w-25 mt-5 mx-auto">Login</button>
+                </div>
+            </div>
+    </div>
+    </form>
+    <div class="card-footer ">
+        <div class="row">
+            <p class="text-center">Create an account</p>
+        </div>
+        <div class="row">
+            <form action="{% url 'signupview' %}" class="mx-auto">
+                <button type="submit" class="w-25 mx-auto">Signup</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}

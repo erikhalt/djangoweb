@@ -2,17 +2,15 @@
 {% load static %}
 
 
-{% block content %}
 
 {% if user.is_authenticated %}
+
+{% block content %}
 <a href="{% url 'projects' %}">Projects</a>
-<a href="{% url 'logoutview' %}">Logout</a>
-{% else %}
+{% endblock %}
 
-<a href="{% url 'loginview' %}">Login</a>
-<a href="{% url 'signupview' %}">Signup</a>
-
+{% block logout %}
+<a class="nav-link active" href="{% url 'logoutview' %}">Logout</a>
+{% endblock %}
 
 {% endif %}
-
-{% endblock %}
