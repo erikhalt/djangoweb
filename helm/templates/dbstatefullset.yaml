@@ -22,6 +22,8 @@ spec:
             secretKeyRef:
               name: mysql-secret
               key: password
+        - name: MYSQL_DATABASE
+          value: django
         ports:
         - containerPort: 3306
           name: mysql
