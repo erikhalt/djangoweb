@@ -13,10 +13,10 @@ envar:
 phpmyadmin:
     fullnameOverride: "phpmyadmin"
     db.host: mysql
-    enabled: false
+    enabled: true
     host: db.haltlair.se
 
 mysql:
-    enabled: false
-    host: false
+    enabled: true
+    host: true
 
