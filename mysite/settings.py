@@ -47,6 +47,7 @@ ALLOWED_HOSTS = allowed_host
 
 INSTALLED_APPS = [
     'bootstrap5',
+    'prm.apps.PrmConfig',
     'pathfinding.apps.PathfindingConfig',
     'sortingalgo.apps.SortingalgoConfig',
     'homepage.apps.HomepageConfig',
@@ -95,12 +96,38 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+host = os.getenv('ALLOWED_HOST','*')
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            "NAME": "mysqldb",
+            "USER": "root",
+            "PASSWORD": "password",
+            "HOST": "localhost",
+            "PORT": "3306"
+        }
     }
-}
+print('aaaa:   '+host)
+if host != '*':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            "NAME": "django",
+            "USER": "root",
+            "PASSWORD": "djangodb",
+            "HOST": "mysql",
+            "PORT": "3306"
+        }
+    }
+
+    
+
 
 
 # Password validation
@@ -154,3 +181,8 @@ else:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None 
+
+LOGIN_REDIRECT_URL = "/prm"
+LOGOUT_REDIRECT_URL = "/prm"
+
+AUTH_USER_MODEL = 'prm.PRMuser'

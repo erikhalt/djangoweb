@@ -1,14 +1,20 @@
 FROM python:3.10-alpine AS builder
 EXPOSE 5000
-
+RUN apk update
+RUN apk add pkgconfig
+RUN apk add mysql mysql-client
 COPY requirements.txt requirements.txt
+RUN apk add --no-cache gcc musl-dev  pkgconf mariadb-dev 
+RUN apk add --no-cache mariadb-connector-c-dev 
+RUN pip install --no-cache-dir -r requirements.txt 
 
-RUN pip3 install -r requirements.txt --no-cache-dir
+
+
 
 COPY . .
 
 RUN mkdir -p /static
 RUN mkdir -p /var/www/static
 
-
-CMD ["gunicorn"  , "-b", "0.0.0.0:5000", "mysite.wsgi"]
+RUN chmod +x entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]

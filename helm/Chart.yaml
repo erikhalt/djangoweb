@@ -22,3 +22,9 @@ version: 0.1.0
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "1.0.0"
+
+dependencies:
+- name: phpmyadmin
+  version: 11.1.6
+  repository: https://charts.bitnami.com/bitnami
+  condition: phpmyadmin.enabled

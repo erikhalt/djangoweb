@@ -1,11 +1,22 @@
 enviroment: dev
 appname: djangoproject
 deploymentname: djangoproject-deployment
-image: registry.digitalocean.com/erikregistry/djangoproject:9e1aa98
+image: registry.digitalocean.com/erikregistry/djangoproject:b9db6ea
 imagePort: 5000
 
 issuerSecretName: letsencrypt-nginx
 envar:
     debug: 'True'
     host: dev.haltlair.se
-    
+
+
+phpmyadmin:
+    fullnameOverride: "phpmyadmin"
+    db.host: mysql
+    enabled: true
+    host: devdb.haltlair.se
+
+mysql:
+    enabled: true
+    host: true
+

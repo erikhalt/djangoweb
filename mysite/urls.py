@@ -22,4 +22,5 @@ urlpatterns = [
     path("weatherapi", include("weatherapi.urls")),
     path("sorting", include("sortingalgo.urls")),
     path("pathfinding", include("pathfinding.urls")),
+    path("prm/", include("prm.urls")),
 ]
