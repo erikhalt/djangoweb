@@ -2,33 +2,42 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mysql
+  name: mysql-{{ .Values.enviroment }}
 spec:
   selector:
     matchLabels:
-      app: mysql
+      app: mysql-{{ .Values.enviroment }}
+  serviceName: "mysql-{{ .Values.enviroment }}"
   template:
     metadata:
       labels:
-        app: mysql
+        app: mysql-{{ .Values.enviroment }}
     spec:
       containers:
       - image: mysql:5.7
-        name: mysql
+        name: mysql-{{ .Values.enviroment }}
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mysql-secret
               key: password
+        - name: MYSQL_DATABASE
+          value: django
         ports:
         - containerPort: 3306
           name: mysql
         volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
-      volumes:
-      - name: mysql-persistent-storage
-        persistentVolumeClaim:
-          claimName: mysql-pv-claim
+        - name: mysql-pvc-{{ .Values.enviroment }}
+          mountPath: /var/lib/{{ .Values.enviroment }}
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-pvc-{{ .Values.enviroment }}
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 5Gi
+      storageClassName: do-block-storage
 {{ end }}

@@ -7,5 +7,5 @@ spec:
   ports:
   - port: 3306
   selector:
-    app: mysql
+    app: mysql-{{ .Values.enviroment }}
 {{ end }}
