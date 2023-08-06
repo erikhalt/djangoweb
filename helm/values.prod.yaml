@@ -17,6 +17,6 @@ phpmyadmin:
     host: db.haltlair.se
 
 mysql:
-    enabled: false
+    enabled: true
     host: false
 
