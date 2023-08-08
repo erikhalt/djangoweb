@@ -39,5 +39,22 @@ spec:
       resources:
         requests:
           storage: 5Gi
+      selector:
+        matchlabel:
+            storage: "strg-{{ .Values.enviroment }}"
       storageClassName: do-block-storage-retain
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv-{{ .Values.enviroment }} 
+  namespace: {{ .Values.enviroment }}
+  labels:
+    storage: strg-{{ .Values.enviroment }} # The labels used when matching with a Persistent Volume Claim.
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
 {{ end }}
