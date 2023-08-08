@@ -40,7 +40,7 @@ spec:
         requests:
           storage: 5Gi
       selector:
-        matchlabel:
+        matchLabels:
             storage: "strg-{{ .Values.enviroment }}"
       storageClassName: do-block-storage-retain
 ---
