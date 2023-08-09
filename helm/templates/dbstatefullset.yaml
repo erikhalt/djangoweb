@@ -8,53 +8,37 @@ spec:
     matchLabels:
       app: mysql-{{ .Values.enviroment }}
   serviceName: "mysql-{{ .Values.enviroment }}"
+  replicas: 1
   template:
     metadata:
       labels:
         app: mysql-{{ .Values.enviroment }}
     spec:
       containers:
-      - image: mysql:5.7
-        name: mysql-{{ .Values.enviroment }}
-        env:
-        - name: MYSQL_ROOT_PASSWORD
+        - image: mysql:8
+          name: mysql-{{ .Values.enviroment }}
+          env:
+          - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mysql-secret
               key: password
         - name: MYSQL_DATABASE
           value: django
-        ports:
-        - containerPort: 3306
-          name: mysql
-        volumeMounts:
-        - name: mysql-pvc-{{ .Values.enviroment }}
-          mountPath: /var/lib/{{ .Values.enviroment }}
+          ports:
+          - containerPort: 3306
+            name: mysql            
+          volumeMounts:
+          - name: mysql-pvc-{{ .Values.enviroment }}
+            mountPath: /var/lib/mysql
   volumeClaimTemplates:
   - metadata:
-      name: mysql-pvc-{{ .Values.enviroment }}
+      name: mysql-persistent-storage
     spec:
       accessModes:
       - ReadWriteOnce
       resources:
         requests:
           storage: 5Gi
-      selector:
-        matchLabels:
-            storage: "strg-{{ .Values.enviroment }}"
       storageClassName: do-block-storage-retain
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: mysql-pv-{{ .Values.enviroment }} 
-  namespace: {{ .Values.enviroment }}
-  labels:
-    storage: strg-{{ .Values.enviroment }} # The labels used when matching with a Persistent Volume Claim.
-spec:
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
 {{ end }}
