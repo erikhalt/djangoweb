@@ -76,7 +76,7 @@ jobs:
         run: ls helm
 
       - name: replace image tag
-        run: sed -i 's/latest/${{ env.TAG }}/g' helm/values.${{ env.NAMESPACE }}.yaml
+        run: sed -i 's/latest/`git rev-parse --short "$GITHUB_SHA"`/g' helm/values.${{ env.NAMESPACE }}.yaml
 
       - name: Install Helmchart
         uses: azure/setup-helm@v3
