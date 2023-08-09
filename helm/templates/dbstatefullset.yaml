@@ -19,10 +19,10 @@ spec:
           name: mysql-{{ .Values.enviroment }}
           env:
           - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: password
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: password
         - name: MYSQL_DATABASE
           value: django
           ports:
