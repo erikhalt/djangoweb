@@ -68,7 +68,7 @@ jobs:
     steps:
       - name: Checkout the repo 
         uses: actions/checkout@v2
-        
+
       - name: ls
         run: ls
 
@@ -77,6 +77,19 @@ jobs:
 
       - name: replace image tag
         run: sed -i 's/latest/${{ env.TAG }}/g' helm/values.${{ env.NAMESPACE }}.yaml
+
+      - name: Install Helmchart
+        uses: azure/setup-helm@v3
+
+      - name: Helm dependency update   
+        run: helm dependency update helm/ -n ${{ env.NAMESPACE }}
+        env:
+          NAMESPACE: ${{ env.NAMESPACE }}
+
+      - name: Set kubernetes namespace
+        run: kubectl config set-context --current --namespace=${{ env.NAMESPACE }}
+        env:
+          NAMESPACE: ${{ env.NAMESPACE }}
 
       - name: Generate Kubernetes manifest from Helmchart
         run: helm template helm -f helm/values.${{ env.NAMESPACE }}.yaml > out.yaml
