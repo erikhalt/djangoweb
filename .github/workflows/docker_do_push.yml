@@ -63,8 +63,15 @@ jobs:
         run: docker push registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:${{ env.TAG }}
       
   run_helm:
+    needs: push_to_digitalocean
     runs-on: ubuntu-latest
     steps:
+      - name: ls
+        run: ls
+
+      - name: ls helm
+        run: ls helm
+
       - name: replace image tag
         run: sed -i 's/latest/${{ env.TAG }}/g' helm/values.${{ env.NAMESPACE }}.yaml
 
