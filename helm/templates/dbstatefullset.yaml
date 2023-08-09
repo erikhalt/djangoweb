@@ -8,28 +8,29 @@ spec:
     matchLabels:
       app: mysql-{{ .Values.enviroment }}
   serviceName: "mysql-{{ .Values.enviroment }}"
+  replicas: 1
   template:
     metadata:
       labels:
         app: mysql-{{ .Values.enviroment }}
     spec:
       containers:
-      - image: mysql:5.7
-        name: mysql-{{ .Values.enviroment }}
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: password
-        - name: MYSQL_DATABASE
-          value: django
-        ports:
-        - containerPort: 3306
-          name: mysql
-        volumeMounts:
-        - name: mysql-pvc-{{ .Values.enviroment }}
-          mountPath: /var/lib/{{ .Values.enviroment }}
+        - image: mysql:8
+          name: mysql-{{ .Values.enviroment }}
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: password
+          - name: MYSQL_DATABASE
+            value: django
+          ports:
+          - containerPort: 3306
+            name: mysql            
+          volumeMounts:
+          - name: mysql-pvc-{{ .Values.enviroment }}
+            mountPath: /var/lib/mysql
   volumeClaimTemplates:
   - metadata:
       name: mysql-pvc-{{ .Values.enviroment }}
@@ -38,6 +39,6 @@ spec:
       - ReadWriteOnce
       resources:
         requests:
-          storage: 5Gi
-      storageClassName: do-block-storage
+          storage: {{ .Values.mysql.storagesize | default "5" }}Gi
+      storageClassName: do-block-storage-retain
 {{ end }}

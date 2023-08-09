@@ -1,9 +1,9 @@
 name: dev image deploy
 
-on:
-  push:
-    branches:
-      - 'dev'
+# on:
+  # push:
+    # branches:
+      # - 'dev'
 env:
   PROJECT_NAME: djangoproject
   TAG: $(git rev-parse --short "$GITHUB_SHA")
