@@ -19,4 +19,4 @@ phpmyadmin:
 mysql:
     enabled: true
     host: true
-
+    storagesize: 15
