@@ -1,16 +1,16 @@
 name: dev image deploy
 
-# on:
-  # push:
-    # branches:
-      # - 'dev'
+on:
+  push:
+    branches:
+      - 'dev'
 env:
   PROJECT_NAME: djangoproject
   TAG: $(git rev-parse --short "$GITHUB_SHA")
   DEPLOYMENT_NAME: djangoproject-deployment
   NAMESPACE: dev
 jobs:
-  push_to_registry:
+  push_to_dockerhub:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
@@ -38,7 +38,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-  build_and_push:
+  push_to_digitalocean:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repo 
@@ -62,12 +62,24 @@ jobs:
       - name: Push image to DO Container Registry 
         run: docker push registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:${{ env.TAG }}
       
-      - name: Save DigitalOcean kubeconfig with short-lived credentials
-        run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 clustermedrasmus
+  run_helm:
+    runs-on: ubuntu-latest
+    setps:
+      - name: replace image tag
+        run: sed -i 's/latest/${{ env.TAG }}/g' helm/values.${{ env.NAMESPACE }}.yaml
 
-      - name: Update deployment
-        run: kubectl set image deployment/${{ env.DEPLOYMENT_NAME }} ${{ env.PROJECT_NAME }}=registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:${{ env.TAG }} -n ${{ env.NAMESPACE }}
-        
+      - name: Generate Kubernetes manifest from Helmchart
+        run: helm template helm -f helm/values.${{ env.NAMESPACE }}.yaml > out.yaml
+        env:
+          NAMESPACE: ${{ env.NAMESPACE }}
+
+      - name: Deploy to DigitalOcean Kubernetes
+        run: kubectl apply -f out.yaml -n ${{ env.NAMESPACE }}
+        env:
+          NAMESPACE: ${{ env.NAMESPACE }}
+
+
       - name: Verify deployment
         run: kubectl rollout status deployment/${{ env.DEPLOYMENT_NAME }} -n ${{ env.NAMESPACE }}
-      
+        env:
+          NAMESPACE: ${{ env.NAMESPACE }}
