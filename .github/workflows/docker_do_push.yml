@@ -66,6 +66,9 @@ jobs:
     needs: push_to_digitalocean
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout the repo 
+        uses: actions/checkout@v2
+        
       - name: ls
         run: ls
 
