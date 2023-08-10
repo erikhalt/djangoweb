@@ -10,10 +10,36 @@ env:
   DEPLOYMENT_NAME: djangoproject-deployment
   NAMESPACE: dev
 jobs:
+  build_image:
+    name: building the image for registry
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build image 
+        run: docker build -t python-docker .
+       
+      - name: save image
+        run: docker save python-docker > /tmp/python-docker.tar
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: python-docker
+          path: /tmp/python-docker.tar
+
   push_to_dockerhub:
+    needs: build_image
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: python-docker
+          path: /tmp
+
+      - name: load image
+        run: docker load < /tmp/python-docker.tar 
+
       - name: Check out the repo
         uses: actions/checkout@v3
       
@@ -23,29 +49,34 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.DOCKER_HUB_KEY }}
       
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-        with:
-          images: erikhalt/${{ env.PROJECT_NAME }}
-      
-      - name: Build and push Docker image
-        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      # - name: Extract metadata (tags, labels) for Docker
+      #   id: meta
+      #   uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+      #   with:
+      #     images: erikhalt/${{ env.PROJECT_NAME }}
 
+      - name: Tag image 
+        run:
+          docker tag python-docker erikhalt/${{ env.PROJECT_NAME }}:${{ env.TAG }}
+      
+      - name: Push image to Dokcerhub Registry 
+        run: docker push erikhalt/${{ env.PROJECT_NAME }}:${{ env.TAG }}
+      
   push_to_digitalocean:
+    needs: build_image
     runs-on: ubuntu-latest
     steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: python-docker
+          path: /tmp
+
+      - name: load image
+        run: docker load < /tmp/python-docker.tar  
+
       - name: Checkout the repo 
         uses: actions/checkout@v2
-
-      - name: Build image 
-        run: docker build -t python-docker .
 
       - name: Install doctl 
         uses: digitalocean/action-doctl@v2
@@ -68,12 +99,6 @@ jobs:
     steps:
       - name: Checkout the repo 
         uses: actions/checkout@v2
-
-      - name: ls
-        run: ls
-
-      - name: ls helm
-        run: ls helm
 
       - name: replace image tag
         run: sed -i 's/latest/'"${{ env.TAG }}"'/g' helm/values.${{ env.NAMESPACE }}.yaml
