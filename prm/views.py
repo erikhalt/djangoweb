@@ -3,6 +3,7 @@ from .database.tables import PRMuser,Project,Task
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from .decorators import project_auth
 
 @csrf_exempt
 def loginview(request):
@@ -93,7 +94,7 @@ def newproject(request):
     return render(request,"newproject.html")
 
 
-
+@project_auth
 @csrf_exempt
 @login_required(login_url='loginview')
 def activeproject(request,projectid):
