@@ -23,12 +23,23 @@ jobs:
         with:
           token: ${{ secrets.DO_REGISTRY_KEY }}
 
+
       - name: Save DigitalOcean kubeconfig with short-lived credentials
         run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 clustermedrasmus
 
 
       - name: Install Helmchart
         uses: azure/setup-helm@v3
+
+      - name: Helm dependency update   
+        run: helm dependency update helm/ -n ${{ env.NAMESPACE }}
+        env:
+          NAMESPACE: ${{ env.NAMESPACE }}
+
+      - name: Set kubernetes namespace
+        run: kubectl config set-context --current --namespace=${{ env.NAMESPACE }}
+        env:
+          NAMESPACE: ${{ env.NAMESPACE }}
          
       - name: Generate Kubernetes manifest from Helmchart
         run: helm template helm -f helm/values.${{ env.NAMESPACE }}.yaml > out.yaml

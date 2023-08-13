@@ -1,7 +1,7 @@
 enviroment: dev
 appname: djangoproject
 deploymentname: djangoproject-deployment
-image: registry.digitalocean.com/erikregistry/djangoproject:b9db6ea
+image: registry.digitalocean.com/erikregistry/djangoproject:latest
 imagePort: 5000
 
 issuerSecretName: letsencrypt-nginx
@@ -19,4 +19,5 @@ phpmyadmin:
 mysql:
     enabled: true
     host: true
+    storagesize: 5
 

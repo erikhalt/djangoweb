@@ -4,48 +4,84 @@ on:
   push:
     branches:
       - 'dev'
+  workflow_dispatch:
+
 env:
   PROJECT_NAME: djangoproject
   TAG: $(git rev-parse --short "$GITHUB_SHA")
   DEPLOYMENT_NAME: djangoproject-deployment
   NAMESPACE: dev
 jobs:
-  push_to_registry:
+  build_image:
+    name: building the image for registry
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+        
+      - name: Build image 
+        run: docker build -t python-docker .
+       
+      - name: save image
+        run: docker save python-docker > /tmp/python-docker.tar
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: python-docker
+          path: /tmp/python-docker.tar
+
+  push_to_dockerhub:
+    needs: build_image
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
       
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: python-docker
+          path: /tmp
+
+      - name: load image
+        run: docker load < /tmp/python-docker.tar 
+
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.DOCKER_HUB_KEY }}
       
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-        with:
-          images: erikhalt/${{ env.PROJECT_NAME }}
-      
-      - name: Build and push Docker image
-        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      # - name: Extract metadata (tags, labels) for Docker
+      #   id: meta
+      #   uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+      #   with:
+      #     images: erikhalt/${{ env.PROJECT_NAME }}
 
-  build_and_push:
+      - name: Tag image 
+        run:
+          docker tag python-docker erikhalt/${{ env.PROJECT_NAME }}:${{ env.TAG }}
+      
+      - name: Push image to Dokcerhub Registry 
+        run: docker push erikhalt/${{ env.PROJECT_NAME }}:${{ env.TAG }}
+      
+  push_to_digitalocean:
+    needs: build_image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repo 
         uses: actions/checkout@v2
+      
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: python-docker
+          path: /tmp
 
-      - name: Build image 
-        run: docker build -t python-docker .
+      - name: load image
+        run: docker load < /tmp/python-docker.tar  
 
       - name: Install doctl 
         uses: digitalocean/action-doctl@v2
@@ -62,12 +98,52 @@ jobs:
       - name: Push image to DO Container Registry 
         run: docker push registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:${{ env.TAG }}
       
+  run_helm:
+    needs: push_to_digitalocean
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo 
+        uses: actions/checkout@v2
+
+      - name: replace image tag
+        run: sed -i 's/latest/'"${{ env.TAG }}"'/g' helm/values.${{ env.NAMESPACE }}.yaml
+
+      - name: Install Helmchart
+        uses: azure/setup-helm@v3
+
+      - name: Install doctl 
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_REGISTRY_KEY }}
+
       - name: Save DigitalOcean kubeconfig with short-lived credentials
         run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 clustermedrasmus
 
-      - name: Update deployment
-        run: kubectl set image deployment/${{ env.DEPLOYMENT_NAME }} ${{ env.PROJECT_NAME }}=registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:${{ env.TAG }} -n ${{ env.NAMESPACE }}
+      - name: Log in to DO Container Registry 
+        run: doctl registry login --expiry-seconds 600
+
+      - name: Helm dependency update   
+        run: helm dependency update helm/ -n ${{ env.NAMESPACE }}
+        env:
+          NAMESPACE: ${{ env.NAMESPACE }}
         
+      - name: Set kubernetes namespace
+        run: kubectl config set-context --current --namespace=${{ env.NAMESPACE }}
+        env:
+          NAMESPACE: ${{ env.NAMESPACE }}
+
+      - name: Generate Kubernetes manifest from Helmchart
+        run: helm template helm -f helm/values.${{ env.NAMESPACE }}.yaml > out.yaml
+        env:
+          NAMESPACE: ${{ env.NAMESPACE }}
+
+      - name: Deploy to DigitalOcean Kubernetes
+        run: kubectl apply -f out.yaml -n ${{ env.NAMESPACE }}
+        env:
+          NAMESPACE: ${{ env.NAMESPACE }}
+
+
       - name: Verify deployment
         run: kubectl rollout status deployment/${{ env.DEPLOYMENT_NAME }} -n ${{ env.NAMESPACE }}
-      
+        env:
+          NAMESPACE: ${{ env.NAMESPACE }}
