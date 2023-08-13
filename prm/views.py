@@ -2,10 +2,10 @@ from django.shortcuts import render,redirect
 from .database.tables import PRMuser,Project,Task
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from .decorators import project_auth
 
-@csrf_exempt
+@csrf_protect
 def loginview(request):
     error = []
     if request.method== 'POST':
@@ -39,7 +39,7 @@ def logoutview(request):
     return redirect('prmlandingpage')
 
 
-@csrf_exempt
+@csrf_protect
 def signupview(request):
     error = []
     if request.user.is_authenticated:
@@ -76,7 +76,7 @@ def project(request):
     projects = Project.objects.filter(userfk_id = user.id)
     return render(request,'projects.html',{'projects':projects})
 
-@csrf_exempt
+@csrf_protect
 @login_required(login_url='loginview')
 def newproject(request):
     user = request.user
