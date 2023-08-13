@@ -1,18 +1,15 @@
-{% extends "Base.html" %}
+{% extends "prmbase.html" %}
+{% load static %}
 
-{% if user.is_authenticated %}
-{% block logout %}
-<a class="nav-link active" href="{% url 'logoutview' %}">Logout</a>
-{% endblock %}
-
-{% endif %}
 
 {% block content %}
-
-{% for project in projects%}
-<p>{{project.Name}}</p>
-{% endfor %}
-
+<ul>
+    {% for project in projects%}
+    <li>
+        <a href="{% url 'activeproject' project.id %}">{{project.Name}}</a>
+    </li>
+    {% endfor %}
+</ul>
 
 
 <a href="{% url 'createproject' %}">Create project</a>

@@ -24,6 +24,7 @@ def loginview(request):
         errorbool = False
     return render(request,"login.html",{'errors':error,'errorbool':errorbool})
 
+
 @login_required(login_url='loginview')
 def landingpage(request):
     return render(request,"landingpage.html")
@@ -74,7 +75,7 @@ def project(request):
     projects = Project.objects.filter(userfk_id = user.id)
     return render(request,'projects.html',{'projects':projects})
 
-
+@csrf_exempt
 @login_required(login_url='loginview')
 def newproject(request):
     user = request.user
@@ -90,3 +91,29 @@ def newproject(request):
 
         return redirect('projects')
     return render(request,"newproject.html")
+
+
+
+@csrf_exempt
+@login_required(login_url='loginview')
+def activeproject(request,projectid):
+    active_project = Project.objects.get(id=projectid)
+    active_task = None
+    if request.method == 'POST':
+        task = Task()
+        task.Stage = 1
+        task.Name = request.POST['Name']
+        task.Description = request.POST['Description']
+        task.projectfk = active_project
+        task.save()
+    
+    try:
+        active_task = Task.objects.filter(projectfk_id=projectid)  
+    except:
+        pass
+    
+    dict = {
+        'active_project':active_project,
+        'active_task':active_task,
+    }
+    return render(request,'activeproject.html',dict)
