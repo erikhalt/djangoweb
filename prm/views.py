@@ -94,8 +94,8 @@ def newproject(request):
     return render(request,"newproject.html")
 
 
-@project_auth
 @csrf_exempt
+@project_auth
 @login_required(login_url='loginview')
 def activeproject(request,projectid):
     active_project = Project.objects.get(id=projectid)
