@@ -3,62 +3,189 @@
 
 
 {% block content %}
-<div class="card-body">
-    <form action="" method="post">
-        {% csrf_token %}
-        <div class="input-group">
-            <div class="row w-100 m-0 p-0">
-                <input type="text" name="Name" placeholder="Name" class="mr-0 w-25 mt-4">
-            </div>
-            <div class="row w-100 m-0 p-0">
-                <input type="textarea" name="Description" placeholder="Description" class="mr-0 w-25 mt-3">
-            </div>
-        </div>
-        <div class="row w-100 m-0 p-0">
-            <button type="submit" class="w-25 mt-5 mr-0">Create Task</button>
-        </div>
-</div>
-</form>
-
 <h1>{{active_project.Name}}</h1>
-<div class="container-fluid overflow-scroll mb-5">
-    {% if active_task %}
-    {% for task in active_task %}
-    <div class="row">
-        <div class="col">
-            <div class="row w-100 m-0 p-0 bg-gradient bg-primary">
-                {% if task.Stage == '1' %}
-                <h1>{{task.Name}}</h1>
-                {% endif %}
-            </div>
+<div class="row m-0 p-0 h-75">
+
+    <div class="col-2 m-0 p-0">
+        <div class="card-body h-25 addtask">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <div class="row w-100 m-1 p-0">
+                        <input type="text" name="Name" placeholder="Name" class="m-0 p-0 w-100">
+                    </div>
+                    <div class="row w-100 m-1 p-0">
+                        <input type="textarea" name="Description" placeholder="Description" class="w-100 m-0 p-0">
+                    </div>
+                </div>
+                <div class="row w-100 m-1 p-0">
+                    <button type="submit" class="w-100 m-0 p-0">Create Task</button>
+                </div>
+            </form>
         </div>
-        <div class="col">
-            <div class="row w-100 m-0 p-0 bg-gradient bg-primary">
-                {% if task.Stage == '2' %}
-                <h1>{{task.Name}}</h1>
-                {% endif %}
-            </div>
-        </div>
-        <div class="col">
-            <div class="row w-100 m-0 p-0 bg-gradient bg-primary">
-                {% if task.Stage == '3' %}
-                <h1>{{task.Name}}</h1>
-                {% endif %}
-            </div>
-        </div>
-        <div class="col">
-            <div class="row w-100 m-0 p-0 bg-gradient bg-primary">
-                {% if task.Stage == '4' %}
-                <h1>{{task.Name}}</h1>
-                {% endif %}
-            </div>
-        </div>
+
     </div>
-    {% endfor %}
-    {% endif %}
+    <div class="col-8 h-100 m-0 p-0">
+
+        <div class="container overflow-scroll h-100 w-100">
+            <div class="row sticky-top">
+                <div class="col h-100 m-0 p-0 border border-dark">
+                    <div class="row w-100 m-0 p-0 h-100">
+                        <div class="container-fluid bg-light bg-gradient taskcells">
+                            <h1>Todo</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col h-100 m-0 p-0 border border-dark">
+                    <div class="row w-100 m-0 p-0 h-100">
+                        <div class="container-fluid bg-light bg-gradient taskcells">
+                            <h1>Ongoing</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col h-100 m-0 p-0 border border-dark">
+                    <div class="row w-100 m-0 p-0 h-100">
+                        <div class="container-fluid bg-light bg-gradient taskcells">
+                            <h1>Review</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col h-100 m-0 p-0 border border-dark">
+                    <div class="row w-100 m-0 p-0 h-100">
+                        <div class="container-fluid bg-light bg-gradient taskcells">
+                            <h1>Finnished</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if active_task %}
+            {% for task in active_task %}
+            <div class="row taskrow">
+                <div class="col h-100 m-0 p-0 border border-dark">
+                    <div class="row w-100 m-0 p-0 h-100">
+                        <div class="container-fluid bg-primary bg-gradient taskcells">
+                            {% if task.Stage == '1' %}
+                            <div class="row h-100">
+                                <div class="col">
+                                </div>
+                                <div class="col">
+                                    <h1>{{task.Name}}</h1>
+                                </div>
+                                <div class="col">
+
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <input type="text" name="stage" value="nextstage" style="display: none;">
+                                        <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
+                                        <button type="submit"><i class='bx bx-chevron-right'></i></button>
+                                    </form>
+
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col h-100 m-0 p-0 border border-dark">
+                    <div class="row w-100 m-0 p-0 h-100">
+                        <div class="container-fluid bg-primary bg-gradient taskcells">
+                            {% if task.Stage == '2' %}
+                            <div class="row h-100">
+                                <div class="col">
+
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <input type="text" name="stage" value="prevstage" style="display: none;">
+                                        <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
+                                        <button type="submit"><i class='bx bx-chevron-left'></i></button>
+                                    </form>
+
+                                </div>
+                                <div class="col">
+                                    <h1>{{task.Name}}</h1>
+                                </div>
+                                <div class="col">
+
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <input type="text" name="stage" value="nextstage" style="display: none;">
+                                        <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
+                                        <button type="submit"><i class='bx bx-chevron-right'></i></button>
+                                    </form>
+
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col h-100 m-0 p-0 border border-dark">
+                    <div class="row w-100 m-0 p-0 h-100">
+                        <div class="container-fluid bg-primary bg-gradient taskcells">
+                            {% if task.Stage == '3' %}
+                            <div class="row h-100">
+                                <div class="col">
+
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <input type="text" name="stage" value="prevstage" style="display: none;">
+                                        <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
+                                        <button type="submit"><i class='bx bx-chevron-left'></i></button>
+                                    </form>
+
+                                </div>
+                                <div class="col">
+                                    <h1>{{task.Name}}</h1>
+                                </div>
+                                <div class="col">
+
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <input type="text" name="stage" value="nextstage" style="display: none;">
+                                        <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
+                                        <button type="submit"><i class='bx bx-chevron-right'></i></button>
+                                    </form>
+
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col h-100 m-0 p-0 border border-dark">
+                    <div class="row w-100 m-0 p-0 h-100">
+                        <div class="container-fluid bg-primary bg-gradient taskcells">
+                            {% if task.Stage == '4' %}
+                            <div class="row h-100">
+                                <div class="col">
+
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <input type="text" name="stage" value="prevstage" style="display: none;">
+                                        <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
+                                        <button type="submit"><i class='bx bx-chevron-left'></i></button>
+                                    </form>
+
+
+                                </div>
+                                <div class="col">
+                                    <h1>{{task.Name}}</h1>
+                                </div>
+                                <div class="col">
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+
+
+
+    </div>
 </div>
-
-
-
-
 {% endblock %}
