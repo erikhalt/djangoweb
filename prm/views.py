@@ -98,16 +98,22 @@ def newproject(request):
 @project_auth
 @login_required(login_url='loginview')
 def activeproject(request,projectid):
+    def changeStage(taskname,direction):
+        if direction == 'next':
+            task = active_task.get(Name=taskname)
+            stage = task.Stage
+            stage = str(int(stage)+1)
+            task.Stage = stage
+            task.save()
+    
+        if direction == 'prev':
+            task = active_task.get(Name=taskname)
+            stage = task.Stage
+            stage = str(int(stage)-1)
+            task.Stage = stage
+            task.save()
     active_project = Project.objects.get(id=projectid)
     active_task = None
-    if request.method == 'POST':
-        task = Task()
-        task.Stage = 1
-        task.Name = request.POST['Name']
-        task.Description = request.POST['Description']
-        task.projectfk = active_project
-        task.save()
-    
     try:
         active_task = Task.objects.filter(projectfk_id=projectid)  
     except:
@@ -117,4 +123,28 @@ def activeproject(request,projectid):
         'active_project':active_project,
         'active_task':active_task,
     }
+    if request.method == 'POST':
+        if request.POST['stage']:
+            if request.POST['stage'] == 'nextstage':
+                changeStage(request.POST['taskname'],'next')
+                
+            elif request.POST['stage'] == 'prevstage':
+                changeStage(request.POST['taskname'],'prev')
+                
+        else: 
+            task = Task()
+            if Task.objects.filter(Name=request.POST['Name']) != None:
+                task.Stage = 1
+                task.Name = request.POST['Name']
+                task.Description = request.POST['Description']
+                task.projectfk = active_project
+                task.save()
+            else:
+                pass
+
+    
+   
+
+    
+
     return render(request,'activeproject.html',dict)
