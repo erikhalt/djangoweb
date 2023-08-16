@@ -7,19 +7,19 @@
 <div class="row m-0 p-0 h-75">
 
     <div class="col-2 m-0 p-0">
-        <div class="card-body h-25 w-25">
+        <div class="card-body h-25 addtask">
             <form action="" method="post">
                 {% csrf_token %}
                 <div class="input-group">
-                    <div class="row w-100 m-0 p-0">
-                        <input type="text" name="Name" placeholder="Name" class="mr-0 w-25 mt-4">
+                    <div class="row w-100 m-1 p-0">
+                        <input type="text" name="Name" placeholder="Name" class="m-0 p-0 w-100">
                     </div>
-                    <div class="row w-100 m-0 p-0">
-                        <input type="textarea" name="Description" placeholder="Description" class="mr-0 w-25 mt-3">
+                    <div class="row w-100 m-1 p-0">
+                        <input type="textarea" name="Description" placeholder="Description" class="w-100 m-0 p-0">
                     </div>
                 </div>
-                <div class="row w-100 m-0 p-0">
-                    <button type="submit" class="w-25 mt-5 mr-0">Create Task</button>
+                <div class="row w-100 m-1 p-0">
+                    <button type="submit" class="w-100 m-0 p-0">Create Task</button>
                 </div>
             </form>
         </div>
@@ -73,11 +73,11 @@
                                 </div>
                                 <div class="col">
 
-                                    <form action="" method="POST">
+                                    <form action="" method="post">
                                         {% csrf_token %}
                                         <input type="text" name="stage" value="nextstage" style="display: none;">
                                         <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
-                                        <a href="" type="submit"><i class='bx bx-chevron-right'></i></a>
+                                        <button type="submit"><i class='bx bx-chevron-right'></i></button>
                                     </form>
 
                                 </div>
@@ -93,11 +93,11 @@
                             <div class="row h-100">
                                 <div class="col">
 
-                                    <form action="" method="POST">
+                                    <form action="" method="post">
                                         {% csrf_token %}
                                         <input type="text" name="stage" value="prevstage" style="display: none;">
                                         <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
-                                        <a href="" type="submit"><i class='bx bx-chevron-left'></i></a>
+                                        <button type="submit"><i class='bx bx-chevron-left'></i></button>
                                     </form>
 
                                 </div>
@@ -106,11 +106,11 @@
                                 </div>
                                 <div class="col">
 
-                                    <form action="" method="POST">
+                                    <form action="" method="post">
                                         {% csrf_token %}
                                         <input type="text" name="stage" value="nextstage" style="display: none;">
                                         <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
-                                        <a href="" type="submit"><i class='bx bx-chevron-right'></i></a>
+                                        <button type="submit"><i class='bx bx-chevron-right'></i></button>
                                     </form>
 
                                 </div>
@@ -126,11 +126,11 @@
                             <div class="row h-100">
                                 <div class="col">
 
-                                    <form action="" method="POST">
+                                    <form action="" method="post">
                                         {% csrf_token %}
                                         <input type="text" name="stage" value="prevstage" style="display: none;">
                                         <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
-                                        <a href="" type="submit"><i class='bx bx-chevron-left'></i></a>
+                                        <button type="submit"><i class='bx bx-chevron-left'></i></button>
                                     </form>
 
                                 </div>
@@ -139,12 +139,11 @@
                                 </div>
                                 <div class="col">
 
-                                    <form action="" method="POST">
+                                    <form action="" method="post">
                                         {% csrf_token %}
                                         <input type="text" name="stage" value="nextstage" style="display: none;">
                                         <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
-                                        <a href="" type="submit"><i class='bx bx-chevron-right'></i></a>
-                                        <input type="submit" name="" id="">
+                                        <button type="submit"><i class='bx bx-chevron-right'></i></button>
                                     </form>
 
                                 </div>
@@ -160,11 +159,11 @@
                             <div class="row h-100">
                                 <div class="col">
 
-                                    <form action="" method="POST">
+                                    <form action="" method="post">
                                         {% csrf_token %}
                                         <input type="text" name="stage" value="prevstage" style="display: none;">
                                         <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
-                                        <a href="" type="submit"><i class='bx bx-chevron-left'></i></a>
+                                        <button type="submit"><i class='bx bx-chevron-left'></i></button>
                                     </form>
 
 
