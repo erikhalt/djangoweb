@@ -1,8 +1,35 @@
-{% extends "Base.html" %}
-
+{% extends "prmbase.html" %}
+{% load static %}
 
 
 {% block content %}
-<h1>Projects</h1>
+
+<div class="row m-0 p-0">
+    <div class="container-fluid mx-auto m-0 p-0 scroll-y w-50 h-50 mt-5 mb-5">
+        <ul class="list-group">
+            {% for project in projects%}
+            <li class="list-group-item d-flex bg-primary bg-gradient w-100">
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold">{{project.Name}}</div>
+                    {{project.Description}}
+                </div>
+                <span class="">
+                    <a href="{% url 'activeproject' project.id %}" class="link-secondary"><i
+                            class='bx bxs-right-arrow'></i></a>
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<div class="row m-0 p-0 mt-5">
+    <div class="col"></div>
+    <div class="col">
+        <a href="{% url 'createproject' %}">
+            <button class="btn btn-primary mx-auto w-100">Create project</button>
+        </a>
+    </div>
+    <div class="col"></div>
+</div>
 
 {% endblock %}

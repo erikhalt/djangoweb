@@ -1,0 +1,11 @@
+{% extends "Base.html" %}
+{% load static %}
+
+{% if user.is_authenticated %}
+{% block logout %}
+<a class="nav-link active" href="{% url 'logoutview' %}">Logout</a>
+{% endblock %}
+{% endif %}
+
+{% block content %}
+{% endblock %}
