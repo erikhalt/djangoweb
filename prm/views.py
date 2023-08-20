@@ -28,7 +28,10 @@ def loginview(request):
 
 @login_required(login_url='loginview')
 def landingpage(request):
-    return render(request,"landingpage.html")
+    user = PRMuser.objects.count()
+    project = Project.objects.count()
+    task = Task.objects.count()
+    return render(request,"landingpage.html",{'user':user,'project':project,'task':task})
 
 
 @login_required(login_url='loginview')    

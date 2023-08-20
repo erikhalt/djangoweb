@@ -4,8 +4,7 @@
 
 {% block content %}
 <h1>{{active_project.Name}}</h1>
-<div class="row m-0 p-0 h-75">
-
+<div class="row m-0 p-0 taskwindowheight overflow-hidden">
     <div class="col-2 m-0 p-0">
         <div class="card-body h-25 addtask">
             <form action="" method="post">
@@ -26,191 +25,245 @@
 
     </div>
     <div class="col-8 h-100 m-0 p-0">
+        <div class="container h-100">
+            <div class="container taskoverflow h-100 w-100">
+                <div class="row sticky-top">
+                    <div class="col h-100 m-0 p-0 border border-dark">
+                        <div class="row w-100 m-0 p-0 h-100">
+                            <div class="container-fluid bg-light bg-gradient taskcells">
+                                <h1>Todo</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col h-100 m-0 p-0 border border-dark">
+                        <div class="row w-100 m-0 p-0 h-100">
+                            <div class="container-fluid bg-light bg-gradient taskcells">
+                                <h1>Ongoing</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col h-100 m-0 p-0 border border-dark">
+                        <div class="row w-100 m-0 p-0 h-100">
+                            <div class="container-fluid bg-light bg-gradient taskcells">
+                                <h1>Review</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col h-100 m-0 p-0 border border-dark">
+                        <div class="row w-100 m-0 p-0 h-100">
+                            <div class="container-fluid bg-light bg-gradient taskcells">
+                                <h1>Finnished</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if active_task %}
+                {% for task in active_task %}
+                <div class="row taskrow">
+                    <div class="col h-100 m-0 p-0 border border-dark">
+                        <div class="row w-100 m-0 p-0 h-100">
+                            <div class="container-fluid bg-primary bg-gradient taskcells">
+                                {% if task.Stage == '1' %}
+                                <div class="row" id="">
+                                    <div class="container-fluid h-100 m-0 p-1 d-flex">
+                                        <div class="col-1">
 
-        <div class="container overflow-scroll h-100 w-100">
-            <div class="row sticky-top">
-                <div class="col h-100 m-0 p-0 border border-dark">
-                    <div class="row w-100 m-0 p-0 h-100">
-                        <div class="container-fluid bg-light bg-gradient taskcells">
-                            <h1>Todo</h1>
+                                        </div>
+                                        <div class="col-10">
+                                            <div
+                                                class="card bg-secondary bg-gradient taskcardheight w-75 m-0 p-0 mx-auto">
+                                                <div class="card-title h-25">
+                                                    <h4>{{task.Name}}</h4>
+                                                </div>
+                                                <div class="card-body h-75">
+                                                    <h6>
+                                                        {{task.Description}}
+                                                    </h6>
+                                                    <form action="" method="post">
+                                                        {% csrf_token %}
+                                                        <input type="text" name="deltask" value="{{task.Name}}"
+                                                            style="display: none;">
+                                                        <button type="submit"><i
+                                                                class='bx bxs-trash-alt bx-xs'></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <form action="" method="post">
+                                                {% csrf_token %}
+                                                <input type="text" name="stage" value="nextstage"
+                                                    style="display: none;">
+                                                <input type="text" name="taskname" value="{{task.Name}}"
+                                                    style="display: none;">
+                                                <button type="submit"><i class='bx bx-chevron-right'></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col h-100 m-0 p-0 border border-dark">
+                        <div class="row w-100 m-0 p-0 h-100">
+                            <div class="container-fluid bg-primary bg-gradient taskcells">
+                                {% if task.Stage == '2' %}
+                                <div class="row">
+                                    <div class="container-fluid h-100 m-0 p-1 d-flex">
+                                        <div class="col-1">
+                                            <form action="" method="post">
+                                                {% csrf_token %}
+                                                <input type="text" name="stage" value="prevstage"
+                                                    style="display: none;">
+                                                <input type="text" name="taskname" value="{{task.Name}}"
+                                                    style="display: none;">
+                                                <button type="submit"><i class='bx bx-chevron-left'></i></button>
+                                            </form>
+                                        </div>
+                                        <div class="col-10">
+                                            <div
+                                                class="card bg-secondary bg-gradient taskcardheight w-75 m-0 p-0 mx-auto">
+                                                <div class="card-title h-25">
+                                                    <h4>{{task.Name}}</h4>
+                                                </div>
+                                                <div class="card-body h-75">
+                                                    <h6>
+                                                        {{task.Description}}
+                                                    </h6>
+                                                    <form action="" method="post">
+                                                        {% csrf_token %}
+                                                        <input type="text" name="deltask" value="{{task.Name}}"
+                                                            style="display: none;">
+                                                        <button type="submit"><i
+                                                                class='bx bxs-trash-alt bx-xs'></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <form action="" method="post">
+                                                {% csrf_token %}
+                                                <input type="text" name="stage" value="nextstage"
+                                                    style="display: none;">
+                                                <input type="text" name="taskname" value="{{task.Name}}"
+                                                    style="display: none;">
+                                                <button type="submit"><i class='bx bx-chevron-right'></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col h-100 m-0 p-0 border border-dark">
+                        <div class="row w-100 m-0 p-0 h-100">
+                            <div class="container-fluid bg-primary bg-gradient taskcells">
+                                {% if task.Stage == '3' %}
+                                <div class="row">
+                                    <div class="container-fluid h-100 m-0 p-1 d-flex">
+                                        <div class="col-1">
+                                            <form action="" method="post">
+                                                {% csrf_token %}
+                                                <input type="text" name="stage" value="prevstage"
+                                                    style="display: none;">
+                                                <input type="text" name="taskname" value="{{task.Name}}"
+                                                    style="display: none;">
+                                                <button type="submit"><i class='bx bx-chevron-left'></i></button>
+                                            </form>
+                                        </div>
+                                        <div class="col-10">
+                                            <div
+                                                class="card bg-secondary bg-gradient taskcardheight w-75 m-0 p-0 mx-auto">
+                                                <div class="card-title h-25">
+                                                    <h4>{{task.Name}}</h4>
+                                                </div>
+                                                <div class="card-body h-75">
+                                                    <h6>
+                                                        {{task.Description}}
+                                                    </h6>
+                                                    <form action="" method="post">
+                                                        {% csrf_token %}
+                                                        <input type="text" name="deltask" value="{{task.Name}}"
+                                                            style="display: none;">
+                                                        <button type="submit"><i
+                                                                class='bx bxs-trash-alt bx-xs'></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <form action="" method="post">
+                                                {% csrf_token %}
+                                                <input type="text" name="stage" value="nextstage"
+                                                    style="display: none;">
+                                                <input type="text" name="taskname" value="{{task.Name}}"
+                                                    style="display: none;">
+                                                <button type="submit"><i class='bx bx-chevron-right'></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col h-100 m-0 p-0 border border-dark">
+                        <div class="row w-100 m-0 p-0 h-100">
+                            <div class="container-fluid bg-primary bg-gradient taskcells">
+                                {% if task.Stage == '4' %}
+                                <div class="row">
+                                    <div class="container-fluid h-100 m-0 p-1 d-flex">
+                                        <div class="col-1">
+                                            <form action="" method="post">
+                                                {% csrf_token %}
+                                                <input type="text" name="stage" value="prevstage"
+                                                    style="display: none;">
+                                                <input type="text" name="taskname" value="{{task.Name}}"
+                                                    style="display: none;">
+                                                <button type="submit"><i class='bx bx-chevron-left'></i></button>
+                                            </form>
+                                        </div>
+                                        <div class="col-10">
+                                            <div
+                                                class="card bg-secondary bg-gradient taskcardheight w-75 m-0 p-0 mx-auto">
+                                                <div class="card-title h-25">
+                                                    <h4>{{task.Name}}</h4>
+                                                </div>
+                                                <div class="card-body h-75">
+                                                    <h6>
+                                                        {{task.Description}}
+                                                    </h6>
+                                                    <form action="" method="post">
+                                                        {% csrf_token %}
+                                                        <input type="text" name="deltask" value="{{task.Name}}"
+                                                            style="display: none;">
+                                                        <button type="submit"><i
+                                                                class='bx bxs-trash-alt bx-xs'></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col h-100 m-0 p-0 border border-dark">
-                    <div class="row w-100 m-0 p-0 h-100">
-                        <div class="container-fluid bg-light bg-gradient taskcells">
-                            <h1>Ongoing</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="col h-100 m-0 p-0 border border-dark">
-                    <div class="row w-100 m-0 p-0 h-100">
-                        <div class="container-fluid bg-light bg-gradient taskcells">
-                            <h1>Review</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="col h-100 m-0 p-0 border border-dark">
-                    <div class="row w-100 m-0 p-0 h-100">
-                        <div class="container-fluid bg-light bg-gradient taskcells">
-                            <h1>Finnished</h1>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
+                {% endif %}
             </div>
-            {% if active_task %}
-            {% for task in active_task %}
-            <div class="row taskrow">
-                <div class="col h-100 m-0 p-0 border border-dark">
-                    <div class="row w-100 m-0 p-0 h-100">
-                        <div class="container-fluid bg-primary bg-gradient taskcells">
-                            {% if task.Stage == '1' %}
-                            <div class="row h-100">
-                                <div class="col">
-                                </div>
-                                <div class="col">
-                                    <h1>{{task.Name}}</h1>
-                                    <form action="" method="post">
-                                        {% csrf_token %}
-                                        <input type="text" name="deltask" value="{{task.Name}}" style="display: none;">
-                                        <button type="submit"><i class='bx bxs-trash-alt'></i></button>
-                                    </form>
-                                </div>
-                                <div class="col">
-
-                                    <form action="" method="post">
-                                        {% csrf_token %}
-                                        <input type="text" name="stage" value="nextstage" style="display: none;">
-                                        <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
-                                        <button type="submit"><i class='bx bx-chevron-right'></i></button>
-                                    </form>
-
-
-                                </div>
-                            </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                <div class="col h-100 m-0 p-0 border border-dark">
-                    <div class="row w-100 m-0 p-0 h-100">
-                        <div class="container-fluid bg-primary bg-gradient taskcells">
-                            {% if task.Stage == '2' %}
-                            <div class="row h-100">
-                                <div class="col">
-
-                                    <form action="" method="post">
-                                        {% csrf_token %}
-                                        <input type="text" name="stage" value="prevstage" style="display: none;">
-                                        <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
-                                        <button type="submit"><i class='bx bx-chevron-left'></i></button>
-                                    </form>
-
-                                </div>
-                                <div class="col">
-                                    <h1>{{task.Name}}</h1>
-                                    <form action="" method="post">
-                                        {% csrf_token %}
-                                        <input type="text" name="deltask" value="{{task.Name}}" style="display: none;">
-                                        <button type="submit"><i class='bx bxs-trash-alt'></i></button>
-                                    </form>
-                                </div>
-                                <div class="col">
-
-                                    <form action="" method="post">
-                                        {% csrf_token %}
-                                        <input type="text" name="stage" value="nextstage" style="display: none;">
-                                        <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
-                                        <button type="submit"><i class='bx bx-chevron-right'></i></button>
-                                    </form>
-
-
-                                </div>
-                            </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                <div class="col h-100 m-0 p-0 border border-dark">
-                    <div class="row w-100 m-0 p-0 h-100">
-                        <div class="container-fluid bg-primary bg-gradient taskcells">
-                            {% if task.Stage == '3' %}
-                            <div class="row h-100">
-                                <div class="col">
-
-                                    <form action="" method="post">
-                                        {% csrf_token %}
-                                        <input type="text" name="stage" value="prevstage" style="display: none;">
-                                        <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
-                                        <button type="submit"><i class='bx bx-chevron-left'></i></button>
-                                    </form>
-
-
-                                </div>
-                                <div class="col">
-                                    <h1>{{task.Name}}</h1>
-                                    <form action="" method="post">
-                                        {% csrf_token %}
-                                        <input type="text" name="deltask" value="{{task.Name}}" style="display: none;">
-                                        <button type="submit"><i class='bx bxs-trash-alt'></i></button>
-                                    </form>
-                                </div>
-                                <div class="col">
-
-                                    <form action="" method="post">
-                                        {% csrf_token %}
-                                        <input type="text" name="stage" value="nextstage" style="display: none;">
-                                        <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
-                                        <button type="submit"><i class='bx bx-chevron-right'></i></button>
-                                    </form>
-
-
-                                </div>
-                            </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                <div class="col h-100 m-0 p-0 border border-dark">
-                    <div class="row w-100 m-0 p-0 h-100">
-                        <div class="container-fluid bg-primary bg-gradient taskcells">
-                            {% if task.Stage == '4' %}
-                            <div class="row h-100">
-                                <div class="col">
-
-                                    <form action="" method="post">
-                                        {% csrf_token %}
-                                        <input type="text" name="stage" value="prevstage" style="display: none;">
-                                        <input type="text" name="taskname" value="{{task.Name}}" style="display: none;">
-                                        <button type="submit"><i class='bx bx-chevron-left'></i></button>
-                                    </form>
 
 
 
-                                </div>
-                                <div class="col">
-                                    <h1>{{task.Name}}</h1>
-                                    <form action="" method="post">
-                                        {% csrf_token %}
-                                        <input type="text" name="deltask" value="{{task.Name}}" style="display: none;">
-                                        <button type="submit"><i class='bx bxs-trash-alt'></i></button>
-                                    </form>
-                                </div>
-                                <div class="col">
-                                </div>
-                            </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-            {% endif %}
         </div>
-
-
-
-
     </div>
 </div>
+
+
 {% endblock %}

@@ -9,3 +9,16 @@
 .addtask {
     width: 55%;
 }
+
+.taskwindowheight {
+    height: 820px;
+}
+
+.taskoverflow {
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.taskcardheight {
+    height: 70%;
+}
