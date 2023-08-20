@@ -5,5 +5,59 @@
 
 
 {% block content %}
-<a href="{% url 'projects' %}">Projects</a>
+<div class="row my-0 p-0 mx-auto">
+    <div class="col m-0 p-0">
+        <div class="card bg-secondary bg-gradient w-25 h-75 mx-auto m-0 p-0 mt-5 mb-5">
+            <div class="card-title mx-auto">
+                <i class='bx bxs-user-pin bx-lg align-middle'></i>
+            </div>
+            <div class="card-body mx-auto">
+                <h1 class="align-middle">
+                    {{user}}
+                </h1>
+                <h4>
+                    Users
+                </h4>
+            </div>
+        </div>
+
+    </div>
+    <div class="col">
+        <div class="card bg-secondary bg-gradient w-25 h-75 mx-auto m-0 p-0 mt-5 mb-5">
+            <div class="card-title mx-auto">
+                <i class='bx bxs-briefcase-alt-2 bx-lg'></i>
+            </div>
+            <div class="card-body mx-auto">
+                <h1 class="align-middle">
+                    {{project}}
+                </h1>
+                <h4 class="card-text o">
+                    Projects
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card bg-secondary bg-gradient w-25 h-55 mx-auto m-0 p-0 mt-5 mb-5">
+            <div class="card-title mx-auto">
+                <i class='bx bx-task bx-lg'></i>
+            </div>
+            <div class="card-body mx-auto">
+                <h1 class="align-middle">
+                    {{task}}
+                </h1>
+                <h4>
+                    Tasks
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row m-0 p-0">
+    <div class="col"></div>
+    <div class="col mx-auto m-0 p-0">
+        <a href="{% url 'projects' %}"><button class="btn btn-primary mx-auto w-100">Projects</button></a>
+    </div>
+    <div class="col"></div>
+</div>
 {% endblock %}
