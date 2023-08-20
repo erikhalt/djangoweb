@@ -122,6 +122,12 @@ def activeproject(request,projectid):
             stage = str(int(stage)-1)
             task.Stage = stage
             task.save()
+    
+    def delete_task(taskname):
+        task = active_task.get(Name=taskname)
+        task.delete()
+
+
     active_project = Project.objects.get(id=projectid)
     active_task = None
     try:
@@ -156,6 +162,9 @@ def activeproject(request,projectid):
                 task.save()
             else:
                 print('error namnet upptaget')
+        
+        if 'deltask' in keys:
+            delete_task(request.POST['deltask'])
 
 
     
