@@ -13,7 +13,7 @@ env:
   NAMESPACE: dev
 jobs:
   build_push_image:
-    name: Push Docker image to Docker Hub
+    name: build push image
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
@@ -55,8 +55,9 @@ jobs:
         run: docker push registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:${{ env.TAG }}
 
   kill_stuff:
-    name: Push Docker image to Docker Hub
+    name: restart deployment
     runs-on: ubuntu-latest
+    needs: build_push_image
     steps:
       - name: Install doctl 
         uses: digitalocean/action-doctl@v2
