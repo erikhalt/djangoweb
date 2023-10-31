@@ -119,7 +119,7 @@ DATABASES = {
             "PORT": "3306"
         }
     }
-print('aaaa:   '+host)
+
 if host != '*':
     DATABASES = {
         'default': {
