@@ -14,6 +14,7 @@ spec:
       labels:
         app.kubernetes.io/name: {{ .Values.appname }}
     spec:
+      imagePullPolicy: Always
       containers:
       - name: {{ .Values.appname }}
         image: {{ .Values.image }}

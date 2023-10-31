@@ -54,4 +54,25 @@ jobs:
       - name: Push image to DO Container Registry 
         run: docker push registry.digitalocean.com/erikregistry/${{ env.PROJECT_NAME }}:${{ env.TAG }}
 
+  kill_stuff:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install doctl 
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_REGISTRY_KEY }}
+
+      - name: Save DigitalOcean kubeconfig with short-lived credentials
+        run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 clustermedrasmus
+
+      - name: Set kubernetes namespace
+        run: kubectl config set-context --current --namespace=${{ env.NAMESPACE }}
+        env:
+          NAMESPACE: ${{ env.NAMESPACE }}
+
+      - name: Verify deployment
+        run: kubectl rollout restart deployment/${{ env.DEPLOYMENT_NAME }} -n ${{ env.NAMESPACE }}
+        env:
+          NAMESPACE: ${{ env.NAMESPACE }}
  

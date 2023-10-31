@@ -192,3 +192,6 @@ LOGIN_REDIRECT_URL = "/prm"
 LOGOUT_REDIRECT_URL = "/prm"
 
 AUTH_USER_MODEL = 'prm.PRMuser'
+
+
+print('Running blyat')
