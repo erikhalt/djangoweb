@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'sortingalgo.apps.SortingalgoConfig',
     'homepage.apps.HomepageConfig',
     'weatherapi.apps.WeatherapiConfig',
+    'aboutme.apps.AboutmeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
