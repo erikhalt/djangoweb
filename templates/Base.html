@@ -46,10 +46,9 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown">About
-                                    me</a>
+                                    data-bs-toggle="dropdown">Info</a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{% url 'home' %}">coming soon</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'aboutme' %}">About Me</a></li>
                                     <li><a class="dropdown-item" href="{% url 'home' %}">coming soon</a></li>
                                 </ul>
                             </li>
@@ -64,6 +63,9 @@
                                     <li><a class="dropdown-item" href="{% url 'pathfinding' %}">Pathfinding
                                             algorithms</a>
                                     </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{% url 'prmlandingpage' %}">ProjectPlanner</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item">
@@ -75,9 +77,7 @@
                                 <a class="nav-link" href="https://www.linkedin.com/in/erik-h-063041100/"
                                     target="_blank"><i class='bx bxl-linkedin-square'></i> Linkedin</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'prmlandingpage' %}">ProjectPlanner</a>
-                            </li>
+
                             <li class="nav-item">
                                 {% block logout %}
 

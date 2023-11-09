@@ -23,4 +23,5 @@ urlpatterns = [
     path("sorting", include("sortingalgo.urls")),
     path("pathfinding", include("pathfinding.urls")),
     path("prm/", include("prm.urls")),
+    path("aboutme/", include("aboutme.urls")),
 ]
